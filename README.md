@@ -55,6 +55,21 @@ AgentLink는 사람이 앱을 뒤적이지 않아도, AI가 가게와 직접 거
 - `npm run lint`: 모든 워크스페이스 ESLint 검사
 - `npm run typecheck`: TypeScript 타입 검사
 - `npm run build`: Functions 컴파일 + 웹 대시보드 번들
+<<<<<<< ours
+=======
+- `npm run test:rules`: Firestore/Storage 보안 규칙 회귀 테스트 (`firebase emulators:exec` 기반)
+- `npm run seed`: Firestore 샘플 데이터 시딩 (`scripts/seed.ts`)
+
+### 샘플 데이터 시딩
+1. Firebase Emulator Suite가 동작 중인지 확인합니다. (동작 중이 아니라면 `npm run dev` 또는 `npm run emulators` 실행)
+2. 별도 터미널에서 아래 명령을 실행합니다.
+   ```bash
+   npm run seed
+   ```
+3. 기본 프로젝트 ID는 `demo-project`로 동작하며, 다른 ID를 쓰려면 `FIREBASE_PROJECT_ID=<PROJECT_ID>` 환경 변수를 지정한 뒤 실행합니다.
+
+시딩 스크립트는 Firestore 에뮬레이터를 대상으로만 동작하도록 기본 포트를 자동 지정합니다.
+>>>>>>> theirs
 
 ---
 
@@ -76,12 +91,19 @@ AgentLink는 사람이 앱을 뒤적이지 않아도, AI가 가게와 직접 거
 
 ## 📁 Firestore 스키마
 
+### 접근 제어 & 인덱스
+- 모든 컬렉션은 클라이언트에서 직접 읽을 수 없으며, Cloud Functions(관리자 SDK) 경유 시에만 접근 가능합니다.
+- `stores` 문서는 해당 점포의 `owner_uid`와 동일한 인증 사용자가 있어야만 작성/수정/삭제할 수 있습니다.
+- `menus` 문서는 소속 매장의 점주(`stores/{storeId}.owner_uid`)만 작성/수정/삭제할 수 있고, 다른 매장의 메뉴를 조작할 수 없습니다.
+- Storage `images/{uid}/**` 경로는 본인 UID로 로그인한 경우에만 업로드가 허용됩니다.
+- 빈번한 지역/상태 필터링을 위해 `stores` 컬렉션에 `region + status` 복합 인덱스를 정의했습니다. (`firestore.indexes.json`)
+
 ### stores/{storeId}
 ```json
 {
   "name": "호건치킨",
-  "region": "서울_강남구",
-  "status": "open",                // open|closed
+  "region": "seoul_gangnam",
+  "status": "open",
   "delivery": {
     "available": true,
     "base_fee": 3000,
@@ -92,75 +114,119 @@ AgentLink는 사람이 앱을 뒤적이지 않아도, AI가 가게와 직접 거
   },
   "rating": { "score": 4.7, "count": 124 },
   "owner_uid": "firebaseAuthUid",
-  "updated_at": "...",
-  "created_at": "..."
+  "created_at": "2024-03-01T09:00:00+09:00",
+  "updated_at": "2024-03-01T09:10:00+09:00"
 }
+```
 
-delivery.rules가 비어 있으면 base_fee만 사용. 가까운 순으로 정렬하면 ETA 계산에 유리.
+`delivery.rules`가 비어 있으면 `base_fee`만 적용합니다. 규칙 배열은 가까운 순으로 정렬하면 ETA 계산에 유리합니다.
 
-menus/{menuId}
+### menus/{menuId}
+```json
 {
   "store_id": "store_001",
-  "region": "서울_강남구",           // 🔑 검색 최적화를 위해 중복 저장
   "name": "후라이드치킨",
   "price": 18000,
   "currency": "KRW",
-  "stock": "in_stock",             // in_stock|out_of_stock
+  "stock": 35,
   "option_groups": [
     {
-      "group_name": "부위", "type": "single_choice",
+      "group_name": "부위",
+      "type": "single_choice",
       "options": [
-        { "name": "순살", "extra_price": 2000 },
-        { "name": "뼈", "extra_price": 0 }
+        { "id": "fillet", "name": "순살", "extra_price": 2000 },
+        { "id": "bone", "name": "뼈", "extra_price": 0 }
       ]
     },
     {
-      "group_name": "추가", "type": "multi_select",
-      "options": [{ "name": "양념추가", "extra_price": 1000 }]
+      "group_name": "추가",
+      "type": "multi_select",
+      "options": [{ "id": "spicy", "name": "양념추가", "extra_price": 1000 }]
     }
   ],
   "rating": { "score": 4.5, "count": 87 },
-  "images": ["gs://.../fried.jpg"],
+  "images": ["gs://demo-bucket/images/store_001/menu_001.jpg"],
   "description": "바삭바삭",
-  "title": "서울_호건치킨_후라이드치킨_18000_3000_KRW_4.5_open_in_stock__hogun",
-  "updated_at": "...",
-  "created_at": "..."
+  "title_v": "hogun-fried-18000",
+  "title": "서울_호건치킨_후라이드치킨_18000_3000_KRW_4.5_open",
+  "created_at": "2024-03-01T09:00:00+09:00",
+  "updated_at": "2024-03-01T09:05:00+09:00"
 }
+```
 
-orders/{orderId}
+### orders/{orderId}
+```json
 {
   "user_id": "demo_user_or_anon",
   "items": [
     {
       "menu_id": "menu_001",
-      "qty": 1,
-      "selected_options": ["순살", "양념추가"],
-      "unit_price": 18000,
-      "options_price": 3000,
-      "total_price": 21000
+      "name": "후라이드치킨",
+      "quantity": 1,
+      "price": 18000,
+      "options": [
+        { "group_id": "부위", "option_id": "fillet" },
+        { "group_id": "추가", "option_id": "spicy" }
+      ]
     }
   ],
-  "status": "pending",             // pending|confirmed|preparing|delivering|completed|cancelled
-  "payment_status": "paid",        // MVP: paid 고정
+  "status": "pending",
+  "payment_status": "paid",
   "receipt_id": "demo123",
   "eta_minutes": 25,
-  "timeline": [{ "status": "pending", "at": "..." }],
+  "timeline": [
+    { "status": "pending", "at": "2024-03-01T09:01:00+09:00" },
+    { "status": "paid", "at": "2024-03-01T09:02:00+09:00" }
+  ],
   "store_id": "store_001",
-  "created_at": "...",
-  "updated_at": "..."
+  "created_at": "2024-03-01T09:00:00+09:00",
+  "updated_at": "2024-03-01T09:02:00+09:00"
 }
+```
+
+### api_keys/{clientId}
+```json
+{
+  "name": "웹 대시보드",
+  "key_hash": "hashed-api-key",
+  "role": "dashboard",
+  "created_at": "2024-03-01T09:00:00+09:00"
+}
+```
+
+### metrics/{dateOrShard}
+```json
+{
+  "api": {
+    "/api/search": { "count": 1200, "avg_ms": 80, "fail": 4 },
+    "/api/order": { "count": 340, "avg_ms": 120, "fail": 7 }
+  }
+}
+```
+
+### settings/runtime
+```json
+{
+  "x_marker": "2024-03-01T09:00:00+09:00",
+  "weights": {
+    "price": 0.3,
+    "rating": 0.5,
+    "fee": 0.2
+  }
+}
+```
 
 🔌 주요 API
 검색
 GET /api/search?region=&keyword=
 → [
-  "서울_호건치킨_후라이드치킨_18000_3000_KRW_4.5_open_in_stock__hogun",
+  "서울_호건치킨_후라이드치킨_18000_3000_KRW_4.5_open",
   ...
 ]
 
 Firestore 인덱스 필요
 
-menus.region + menus.name 조합으로 복합 인덱스 생성.
+stores.region + stores.status 조합으로 복합 인덱스 생성.
 
 firebase firestore:indexes로 내보내고 firebase deploy --only firestore:indexes로 동기화.
 

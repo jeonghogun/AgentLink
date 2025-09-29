@@ -1,4 +1,5 @@
 {
+<<<<<<< ours
   // Example (Standard Edition):
   //
   // "indexes": [
@@ -49,3 +50,17 @@
   "indexes": [],
   "fieldOverrides": []
 }
+=======
+  "indexes": [
+    {
+      "collectionGroup": "stores",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "region", "order": "ASCENDING" },
+        { "fieldPath": "status", "order": "ASCENDING" }
+      ]
+    }
+  ],
+  "fieldOverrides": []
+}
+>>>>>>> theirs

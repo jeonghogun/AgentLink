@@ -1,5 +1,9 @@
 {
   "projects": {
+<<<<<<< ours
     "default": "agentlink-391f7"
+=======
+    "default": "your-project-id"
+>>>>>>> theirs
   }
 }

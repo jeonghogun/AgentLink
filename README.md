@@ -17,47 +17,6 @@ AgentLink는 사람이 앱을 뒤적이지 않아도, AI가 가게와 직접 거
 
 ---
 
-## 🛠️ 로컬 개발 가이드
-
-### 사전 준비
-1. Node.js 20 LTS 환경을 준비합니다.
-2. 프로젝트 루트에서 Firebase CLI를 설치합니다.
-   ```bash
-   npm i -g firebase-tools
-   ```
-3. Firebase 계정으로 로그인합니다.
-   ```bash
-   firebase login
-   ```
-4. 사용할 Firebase 프로젝트를 지정합니다.
-   ```bash
-   firebase use <PROJECT_ID>
-   ```
-
-### 개발 서버 실행
-- 프로젝트 루트에서 아래 명령을 실행하면 모든 에뮬레이터와 웹 대시보드가 동시에 기동됩니다.
-  ```bash
-  npm run dev
-  ```
-- 실행 흐름
-  - `web-dashboard` 워크스페이스: Vite 개발 서버 (`http://localhost:5173`)
-  - Firebase Emulator Suite (`firebase emulators:start`)
-    - Hosting: http://localhost:5000
-    - Functions (Express API 포함): http://localhost:5001
-    - Firestore: http://localhost:8080
-    - Storage: http://localhost:9199
-    - Auth: http://localhost:9099
-    - Emulator UI: http://localhost:4000 (자동 활성화)
-- Functions TypeScript는 `npm run -w functions build:watch`로 `lib/` 디렉터리에 실시간 컴파일되고, Hosting은 `web-dashboard`의 Vite dev 서버에 프록시됩니다.
-- 모든 서비스는 Firebase Emulator Suite를 통해 분리된 로컬 샌드박스에서 실행되므로, 실제 프로젝트 리소스에는 영향을 주지 않습니다.
-
-### 기타 스크립트
-- `npm run lint`: 모든 워크스페이스 ESLint 검사
-- `npm run typecheck`: TypeScript 타입 검사
-- `npm run build`: Functions 컴파일 + 웹 대시보드 번들
-
----
-
 ## 🏗️ 아키텍처 개요
 
 ### Firebase 구성 요소
@@ -213,47 +172,6 @@ POST /api/orchestrate
 5주차: 관측/메트릭, 토큰 절감 계산, Rate limit
 
 6주차: 데모 리허설, 모의 응답 백업, 문서화
-
----
-
-## 🛠️ 로컬 개발 가이드
-
-### 사전 준비
-1. Node.js 20 LTS 환경을 준비합니다.
-2. 프로젝트 루트에서 Firebase CLI를 설치합니다.
-   ```bash
-   npm i -g firebase-tools
-   ```
-3. Firebase 계정으로 로그인합니다.
-   ```bash
-   firebase login
-   ```
-4. 사용할 Firebase 프로젝트를 지정합니다.
-   ```bash
-   firebase use <PROJECT_ID>
-   ```
-
-### 개발 서버 실행
-- 프로젝트 루트에서 아래 명령을 실행하면 모든 에뮬레이터와 웹 대시보드가 동시에 기동됩니다.
-  ```bash
-  npm run dev
-  ```
-- 실행 흐름
-  - `web-dashboard` 워크스페이스: Vite 개발 서버 (`http://localhost:5173`)
-  - Firebase Emulator Suite (`firebase emulators:start`)
-    - Hosting: http://localhost:5000
-    - Functions (Express API 포함): http://localhost:5001
-    - Firestore: http://localhost:8080
-    - Storage: http://localhost:9199
-    - Auth: http://localhost:9099
-    - Emulator UI: http://localhost:4000 (자동 활성화)
-- Functions TypeScript는 `npm run -w functions build:watch`로 `lib/` 디렉터리에 실시간 컴파일되고, Hosting은 `web-dashboard`의 Vite dev 서버에 프록시됩니다.
-- 모든 서비스는 Firebase Emulator Suite를 통해 분리된 로컬 샌드박스에서 실행되므로, 실제 프로젝트 리소스에는 영향을 주지 않습니다.
-
-### 기타 스크립트
-- `npm run lint`: 모든 워크스페이스 ESLint 검사
-- `npm run typecheck`: TypeScript 타입 검사
-- `npm run build`: Functions 컴파일 + 웹 대시보드 번들
 
 📊 측정 & 관측성
 

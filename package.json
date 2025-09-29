@@ -1,0 +1,34 @@
+{
+  "name": "agentlink-monorepo",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": "^20.0.0"
+  },
+  "workspaces": [
+    "functions",
+    "web-dashboard"
+  ],
+  "scripts": {
+    "predev": "npm run build --workspaces --if-present",
+    "dev": "concurrently \"npm run -w functions build:watch\" \"npm run -w web-dashboard dev\" \"npm run emulators\"",
+    "emulators": "firebase emulators:start --import=./.firebase/emulator-data --export-on-exit",
+    "lint": "npm run lint --workspaces --if-present",
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "build": "npm run build --workspaces --if-present"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^7.0.0",
+    "@typescript-eslint/parser": "^7.0.0",
+    "concurrently": "^8.2.2",
+    "eslint": "^8.56.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-jsx-a11y": "^6.8.0",
+    "eslint-plugin-react": "^7.33.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "firebase-tools": "^13.4.0",
+    "prettier": "^3.2.5",
+    "typescript": "^5.3.3"
+  }
+}

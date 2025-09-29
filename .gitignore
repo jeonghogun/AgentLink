@@ -1,0 +1,23 @@
+# Dependencies
+node_modules/
+
+# Build outputs
+dist/
+lib/
+coverage/
+
+# Firebase emulator data
+.firebase/
+.firestore/
+.storage/
+.firebase-*
+
+# IDE files
+.vscode/
+.idea/
+.DS_Store
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*

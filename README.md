@@ -4,18 +4,13 @@
 AgentLink는 사람이 앱을 뒤적이지 않아도, AI가 가게와 직접 거래를 붙여주는 초경량 주문 네트워크다.  
 플랫폼을 거치지 않고 다이렉트로 주문·예약·결제 흐름을 완성한다.  
 
----
 
 ## ✨ 왜 필요한가
-- **토큰·시간 낭비 제거**  
   기존 플랫폼의 UI/텍스트를 전부 읽느라 모델이 비효율적으로 작동.  
   → AgentLink는 표준화된 “한 줄(title)”로 80% 결정을 끝낸다.
-- **플랫폼 종속 탈피**  
   데이터와 손님이 모두 플랫폼 지갑에 묶이는 구조를 깨고, 가게가 자기 카탈로그를 직접 가진다.
-- **신뢰를 구조로 확보**  
   로고/브랜드 대신 **X-마커와 검증키**로 데이터 진위를 판단한다.
 
----
 
 ## 🛠️ 로컬 개발 가이드
 
@@ -35,11 +30,9 @@ AgentLink는 사람이 앱을 뒤적이지 않아도, AI가 가게와 직접 거
    ```
 
 ### 개발 서버 실행
-- 프로젝트 루트에서 아래 명령을 실행하면 모든 에뮬레이터와 웹 대시보드가 동시에 기동됩니다.
   ```bash
   npm run dev
   ```
-- 실행 흐름
   - `web-dashboard` 워크스페이스: Vite 개발 서버 (`http://localhost:5173`)
   - Firebase Emulator Suite (`firebase emulators:start`)
     - Hosting: http://localhost:5000
@@ -48,42 +41,19 @@ AgentLink는 사람이 앱을 뒤적이지 않아도, AI가 가게와 직접 거
     - Storage: http://localhost:9199
     - Auth: http://localhost:9099
     - Emulator UI: http://localhost:4000 (자동 활성화)
-- Functions TypeScript는 `npm run -w functions build:watch`로 `lib/` 디렉터리에 실시간 컴파일되고, Hosting은 `web-dashboard`의 Vite dev 서버에 프록시됩니다.
-- 모든 서비스는 Firebase Emulator Suite를 통해 분리된 로컬 샌드박스에서 실행되므로, 실제 프로젝트 리소스에는 영향을 주지 않습니다.
 
 ### 기타 스크립트
-- `npm run lint`: 모든 워크스페이스 ESLint 검사
-- `npm run typecheck`: TypeScript 타입 검사
-- `npm run build`: Functions 컴파일 + 웹 대시보드 번들
-- `npm run build`: Functions 컴파일 + 웹 대시보드 번들
-- `npm run test:rules`: Firestore/Storage 보안 규칙 회귀 테스트 (`firebase emulators:exec` 기반)
-- `npm run seed`: Firestore 샘플 데이터 시딩 (`scripts/seed.ts`)
----
 
 ## 🏗️ 아키텍처 개요
 
 ### Firebase 구성 요소
-- **Firestore**: 데이터 저장 (`stores`, `menus`, `orders`, `api_keys`, `metrics`, `settings`)
-- **Cloud Functions**: `/api/*` 엔드포인트, 주문 상태 전환, 타이틀 생성기
-- **Firebase Hosting**:
   - `/dashboard/*`: 업체 대시보드 (React SPA)
   - `/ai/*`: AI 전용 JSON-LD 페이지
-- **Firebase Auth**: 업체 로그인/권한 제어
-- **Cloud Storage**: 메뉴 사진 저장
-- **Security Rules**: Firestore/Storage 접근 제어
-- **Cloud Logging/Monitoring**: 관측/메트릭
-- **Cloud Scheduler**: 주문 상태 자동 전환
 
----
 
 ## 📁 Firestore 스키마
 
 ### 접근 제어 & 인덱스
-- 모든 컬렉션은 클라이언트에서 직접 읽을 수 없으며, Cloud Functions(관리자 SDK) 경유 시에만 접근 가능합니다.
-- `stores` 문서는 해당 점포의 `owner_uid`와 동일한 인증 사용자가 있어야만 작성/수정/삭제할 수 있습니다.
-- `menus` 문서는 소속 매장의 점주(`stores/{storeId}.owner_uid`)만 작성/수정/삭제할 수 있고, 다른 매장의 메뉴를 조작할 수 없습니다.
-- Storage `images/{uid}/**` 경로는 본인 UID로 로그인한 경우에만 업로드가 허용됩니다.
-- 빈번한 지역/상태 필터링을 위해 `stores` 컬렉션에 `region + status` 복합 인덱스를 정의했습니다. (`firestore.indexes.json`)
 
 ### stores/{storeId}
 ```json

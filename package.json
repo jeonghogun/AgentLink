@@ -16,38 +16,26 @@
     "emulators": "firebase emulators:start --import=./.firebase/emulator-data --export-on-exit",
     "lint": "npm run lint --workspaces --if-present",
     "typecheck": "npm run typecheck --workspaces --if-present",
-<<<<<<< ours
-    "build": "npm run build --workspaces --if-present"
-=======
     "build": "npm run build --workspaces --if-present",
     "test:rules": "firebase emulators:exec --only firestore,storage \"npx tsx scripts/test-rules.ts\"",
     "seed": "tsx scripts/seed.ts"
->>>>>>> theirs
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^7.0.0",
     "@typescript-eslint/parser": "^7.0.0",
-<<<<<<< ours
-=======
     "@firebase/rules-unit-testing": "^3.0.0",
     "@types/node": "^20.11.19",
->>>>>>> theirs
     "concurrently": "^8.2.2",
     "eslint": "^8.56.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-jsx-a11y": "^6.8.0",
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.6.0",
-<<<<<<< ours
-    "firebase-tools": "^13.4.0",
-    "prettier": "^3.2.5",
-=======
     "firebase": "^10.7.1",
     "firebase-admin": "^12.0.0",
     "firebase-tools": "^13.4.0",
     "prettier": "^3.2.5",
     "tsx": "^4.7.0",
->>>>>>> theirs
     "typescript": "^5.3.3"
   }
 }

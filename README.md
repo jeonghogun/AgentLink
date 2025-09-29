@@ -55,22 +55,9 @@ AgentLink는 사람이 앱을 뒤적이지 않아도, AI가 가게와 직접 거
 - `npm run lint`: 모든 워크스페이스 ESLint 검사
 - `npm run typecheck`: TypeScript 타입 검사
 - `npm run build`: Functions 컴파일 + 웹 대시보드 번들
-<<<<<<< ours
-=======
+- `npm run build`: Functions 컴파일 + 웹 대시보드 번들
 - `npm run test:rules`: Firestore/Storage 보안 규칙 회귀 테스트 (`firebase emulators:exec` 기반)
 - `npm run seed`: Firestore 샘플 데이터 시딩 (`scripts/seed.ts`)
-
-### 샘플 데이터 시딩
-1. Firebase Emulator Suite가 동작 중인지 확인합니다. (동작 중이 아니라면 `npm run dev` 또는 `npm run emulators` 실행)
-2. 별도 터미널에서 아래 명령을 실행합니다.
-   ```bash
-   npm run seed
-   ```
-3. 기본 프로젝트 ID는 `demo-project`로 동작하며, 다른 ID를 쓰려면 `FIREBASE_PROJECT_ID=<PROJECT_ID>` 환경 변수를 지정한 뒤 실행합니다.
-
-시딩 스크립트는 Firestore 에뮬레이터를 대상으로만 동작하도록 기본 포트를 자동 지정합니다.
->>>>>>> theirs
-
 ---
 
 ## 🏗️ 아키텍처 개요

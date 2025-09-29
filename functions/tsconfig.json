@@ -4,7 +4,7 @@
     "outDir": "./lib",
     "rootDir": "./src",
     "moduleResolution": "NodeNext",
-    "module": "ESNext",
+    "module": "NodeNext",
     "declaration": true,
     "sourceMap": true
   },

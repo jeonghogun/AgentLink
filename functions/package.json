@@ -13,7 +13,7 @@
     "build:watch": "tsc -p tsconfig.json --watch --preserveWatchOutput",
     "lint": "eslint \"src/**/*.{ts,tsx}\"",
     "typecheck": "tsc -p tsconfig.json --noEmit",
-    "test": "tsx --test src/lib/title.test.ts"
+    "test": "tsx --test src/lib/title.test.ts src/lib/orders.test.ts"
   },
   "dependencies": {
     "cors": "^2.8.5",

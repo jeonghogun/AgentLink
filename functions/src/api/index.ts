@@ -1,6 +1,7 @@
 import cors from 'cors';
 import express, { NextFunction, Request, Response } from 'express';
 import { ApiError, fetchMenuWithStore, searchMenus } from '../lib/db.js';
+import { createOrder, getOrderStatus } from '../lib/orders.js';
 import { metricsMiddleware } from './metrics.js';
 
 type AsyncRouteHandler = (req: Request, res: Response, next: NextFunction) => Promise<void>;
@@ -81,6 +82,22 @@ export function createApiApp(): express.Express {
     }),
   );
 
+  app.post(
+    '/order',
+    asyncHandler(async (req, res) => {
+      const result = await createOrder(req.body);
+      res.status(201).json(result);
+    }),
+  );
+
+  app.get(
+    '/order/:id/status',
+    asyncHandler(async (req, res) => {
+      const result = await getOrderStatus(req.params.id);
+      res.status(200).json(result);
+    }),
+  );
+
   app.use((_req, _res, next) => {
     next(new ApiError(404, 'route/not-found', '요청한 API 경로를 찾을 수 없습니다.', '엔드포인트 경로를 다시 확인해주세요.'));
   });
@@ -100,7 +117,20 @@ function asyncHandler(fn: AsyncRouteHandler) {
 
 function errorHandler(error: unknown, _req: Request, res: Response, _next: NextFunction): void {
   const normalized = normalizeError(error);
-  res.status(normalized.status).json({ code: normalized.code, message: normalized.message, hint: normalized.hint });
+  const payload: Record<string, unknown> = {
+    code: normalized.code,
+    message: normalized.message,
+  };
+
+  if (normalized.hint) {
+    payload.hint = normalized.hint;
+  }
+
+  if (normalized.details) {
+    Object.assign(payload, normalized.details);
+  }
+
+  res.status(normalized.status).json(payload);
 }
 
 function normalizeError(error: unknown): ApiError {

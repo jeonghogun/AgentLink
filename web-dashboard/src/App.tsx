@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 type HealthResponse = {
-  status: string;
+  ok?: boolean;
 };
 
 function App() {
@@ -16,7 +16,7 @@ function App() {
           throw new Error('Request failed');
         }
         const data = (await response.json()) as HealthResponse;
-        setHealth(data.status === 'ok' ? 'ok' : 'error');
+        setHealth(data.ok === true ? 'ok' : 'error');
       })
       .catch(() => {
         setHealth('error');

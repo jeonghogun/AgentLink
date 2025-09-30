@@ -57,12 +57,14 @@ export class ApiError extends Error {
   readonly status: number;
   readonly code: string;
   readonly hint?: string;
+  readonly details?: Record<string, unknown>;
 
-  constructor(status: number, code: string, message: string, hint?: string) {
+  constructor(status: number, code: string, message: string, hint?: string, details?: Record<string, unknown>) {
     super(message);
     this.status = status;
     this.code = code;
     this.hint = hint;
+    this.details = details;
   }
 }
 
@@ -234,7 +236,7 @@ function clampLimit(limit: number | undefined): number {
   return Math.min(Math.max(Math.floor(limit), 1), 50);
 }
 
-function mapFirestoreError(context: string, error: unknown): ApiError {
+export function mapFirestoreError(context: string, error: unknown): ApiError {
   const message = error instanceof Error ? error.message : '알 수 없는 Firestore 오류가 발생했습니다.';
   return new ApiError(500, 'firestore/error', `Firestore(${context}) 요청 중 오류가 발생했습니다.`, message);
 }

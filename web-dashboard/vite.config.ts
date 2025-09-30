@@ -8,19 +8,22 @@ export default defineConfig({
     port: 5173,
     proxy: {
       '/api': {
-        target: 'http://localhost:5001',
+        target: 'http://localhost:5001/agentlink-391f7/us-central1',
         changeOrigin: true,
         secure: false,
+        rewrite: (path) => path.replace(/^\/api/, '/api'),
       },
       '/ai': {
-        target: 'http://localhost:5001',
+        target: 'http://localhost:5001/agentlink-391f7/us-central1',
         changeOrigin: true,
         secure: false,
+        rewrite: (path) => path.replace(/^\/ai/, '/ai'),
       },
       '/dashboard': {
-        target: 'http://localhost:5001',
+        target: 'http://localhost:5001/agentlink-391f7/us-central1',
         changeOrigin: true,
         secure: false,
+        rewrite: (path) => path.replace(/^\/dashboard/, '/dashboard'),
       },
     },
   },

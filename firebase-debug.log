@@ -1,0 +1,500 @@
+[debug] [2025-09-30T02:28:48.558Z] ----------------------------------------------------------------------
+[debug] [2025-09-30T02:28:48.559Z] Command:       /Users/hogeoning/.nvm/versions/node/v22.17.0/bin/node /Users/hogeoning/Desktop/AgentLink/node_modules/.bin/firebase emulators:start --import=./.firebase/emulator-data --export-on-exit
+[debug] [2025-09-30T02:28:48.559Z] CLI Version:   13.35.1
+[debug] [2025-09-30T02:28:48.559Z] Platform:      darwin
+[debug] [2025-09-30T02:28:48.559Z] Node Version:  v22.17.0
+[debug] [2025-09-30T02:28:48.560Z] Time:          Tue Sep 30 2025 11:28:48 GMT+0900 (Korean Standard Time)
+[debug] [2025-09-30T02:28:48.560Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2025-09-30T02:28:48.668Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-09-30T02:28:48.668Z] > authorizing via signed-in user (wjdghrjs9595@gmail.com)
+[debug] [2025-09-30T02:28:48.766Z] openjdk version "11.0.28" 2025-07-15
+[debug] [2025-09-30T02:28:48.766Z] 
+OpenJDK Runtime Environment Homebrew (build 11.0.28+0)
+OpenJDK 64-Bit Server VM Homebrew (build 11.0.28+0, mixed mode)
+
+[debug] [2025-09-30T02:28:48.769Z] Parsed Java major version: 11
+[info] i  emulators: Starting emulators: auth, functions, firestore, hosting, storage, extensions {"metadata":{"emulator":{"name":"hub"},"message":"Starting emulators: auth, functions, firestore, hosting, storage, extensions"}}
+[debug] [2025-09-30T02:28:48.770Z] Checked if tokens are valid: true, expires at: 1759200916189
+[debug] [2025-09-30T02:28:48.770Z] Checked if tokens are valid: true, expires at: 1759200916189
+[debug] [2025-09-30T02:28:48.770Z] >>> [apiv2][query] GET https://cloudresourcemanager.googleapis.com/v1/projects/agentlink-391f7 [none]
+[debug] [2025-09-30T02:28:49.094Z] <<< [apiv2][status] GET https://cloudresourcemanager.googleapis.com/v1/projects/agentlink-391f7 200
+[debug] [2025-09-30T02:28:49.094Z] <<< [apiv2][body] GET https://cloudresourcemanager.googleapis.com/v1/projects/agentlink-391f7 {"projectNumber":"119524999553","projectId":"agentlink-391f7","lifecycleState":"ACTIVE","name":"AgentLink","labels":{"firebase":"enabled","firebase-core":"disabled"},"createTime":"2025-09-29T22:39:35.643628Z"}
+[debug] [2025-09-30T02:28:49.488Z] [logging] Logging Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2025-09-30T02:28:49.488Z] [auth] Authentication Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2025-09-30T02:28:49.488Z] [firestore] Firestore Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2025-09-30T02:28:49.488Z] [firestore.websocket] websocket server for firestore only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2025-09-30T02:28:49.488Z] [hosting] Hosting Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2025-09-30T02:28:49.488Z] [storage] Storage Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2025-09-30T02:28:49.488Z] assigned listening specs for emulators {"user":{"hub":[{"address":"127.0.0.1","family":"IPv4","port":4400},{"address":"::1","family":"IPv6","port":4400}],"ui":[{"address":"127.0.0.1","family":"IPv4","port":4000},{"address":"::1","family":"IPv6","port":4000}],"logging":[{"address":"127.0.0.1","family":"IPv4","port":4500}],"auth":[{"address":"127.0.0.1","family":"IPv4","port":9099}],"firestore":[{"address":"127.0.0.1","family":"IPv4","port":8080}],"firestore.websocket":[{"address":"127.0.0.1","family":"IPv4","port":9150}],"hosting":[{"address":"127.0.0.1","family":"IPv4","port":5002}],"storage":[{"address":"127.0.0.1","family":"IPv4","port":9199}]},"metadata":{"message":"assigned listening specs for emulators"}}
+[debug] [2025-09-30T02:28:49.490Z] [hub] writing locator at /var/folders/l1/blydpfmj59jfbdr3wnmft9000000gn/T/hub-agentlink-391f7.json
+[debug] [2025-09-30T02:28:49.492Z] [Extensions] Started Extensions emulator, this is a noop.
+[debug] [2025-09-30T02:28:49.636Z] [functions] Functions Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2025-09-30T02:28:49.636Z] [eventarc] Eventarc Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2025-09-30T02:28:49.636Z] [tasks] Cloud Tasks Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2025-09-30T02:28:49.636Z] late-assigned ports for functions and eventarc emulators {"user":{"hub":[{"address":"127.0.0.1","family":"IPv4","port":4400},{"address":"::1","family":"IPv6","port":4400}],"ui":[{"address":"127.0.0.1","family":"IPv4","port":4000},{"address":"::1","family":"IPv6","port":4000}],"logging":[{"address":"127.0.0.1","family":"IPv4","port":4500}],"auth":[{"address":"127.0.0.1","family":"IPv4","port":9099}],"firestore":[{"address":"127.0.0.1","family":"IPv4","port":8080}],"firestore.websocket":[{"address":"127.0.0.1","family":"IPv4","port":9150}],"hosting":[{"address":"127.0.0.1","family":"IPv4","port":5002}],"storage":[{"address":"127.0.0.1","family":"IPv4","port":9199}],"functions":[{"address":"127.0.0.1","family":"IPv4","port":5001}],"eventarc":[{"address":"127.0.0.1","family":"IPv4","port":9299}],"tasks":[{"address":"127.0.0.1","family":"IPv4","port":9499}]},"metadata":{"message":"late-assigned ports for functions and eventarc emulators"}}
+[warn] ⚠  functions: The following emulators are not running, calls to these services from the Functions emulator will affect production: apphosting, database, pubsub, dataconnect {"metadata":{"emulator":{"name":"functions"},"message":"The following emulators are not running, calls to these services from the Functions emulator will affect production: \u001b[1mapphosting, database, pubsub, dataconnect\u001b[22m"}}
+[warn] ⚠  functions: Application Default Credentials detected. Non-emulated services will access production using these credentials. Be careful! {"metadata":{"emulator":{"name":"functions"},"message":"Application Default Credentials detected. Non-emulated services will access production using these credentials. Be careful!"}}
+[debug] [2025-09-30T02:28:51.418Z] Checked if tokens are valid: true, expires at: 1759200916189
+[debug] [2025-09-30T02:28:51.418Z] Checked if tokens are valid: true, expires at: 1759200916189
+[debug] [2025-09-30T02:28:51.418Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/agentlink-391f7/adminSdkConfig [none]
+[debug] [2025-09-30T02:28:51.793Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/agentlink-391f7/adminSdkConfig 200
+[debug] [2025-09-30T02:28:51.793Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/agentlink-391f7/adminSdkConfig {"projectId":"agentlink-391f7","storageBucket":"agentlink-391f7.firebasestorage.app"}
+[debug] [2025-09-30T02:28:51.814Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"firestore"},"message":"Ignoring unsupported arg: auto_download"}}
+[debug] [2025-09-30T02:28:51.814Z] Ignoring unsupported arg: single_project_mode_error {"metadata":{"emulator":{"name":"firestore"},"message":"Ignoring unsupported arg: single_project_mode_error"}}
+[debug] [2025-09-30T02:28:51.814Z] Starting Firestore Emulator with command {"binary":"java","args":["-Dgoogle.cloud_firestore.debug_log_level=FINE","-Duser.language=en","-jar","/Users/hogeoning/.cache/firebase/emulators/cloud-firestore-emulator-v1.19.8.jar","--host","127.0.0.1","--port",8080,"--websocket_port",9150,"--project_id","agentlink-391f7","--rules","/Users/hogeoning/Desktop/AgentLink/firestore.rules","--single_project_mode",true,"--functions_emulator","127.0.0.1:5001"],"optionalArgs":["port","webchannel_port","host","rules","websocket_port","functions_emulator","seed_from_export","project_id","single_project_mode"],"joinArgs":false,"shell":false,"port":8080} {"metadata":{"emulator":{"name":"firestore"},"message":"Starting Firestore Emulator with command {\"binary\":\"java\",\"args\":[\"-Dgoogle.cloud_firestore.debug_log_level=FINE\",\"-Duser.language=en\",\"-jar\",\"/Users/hogeoning/.cache/firebase/emulators/cloud-firestore-emulator-v1.19.8.jar\",\"--host\",\"127.0.0.1\",\"--port\",8080,\"--websocket_port\",9150,\"--project_id\",\"agentlink-391f7\",\"--rules\",\"/Users/hogeoning/Desktop/AgentLink/firestore.rules\",\"--single_project_mode\",true,\"--functions_emulator\",\"127.0.0.1:5001\"],\"optionalArgs\":[\"port\",\"webchannel_port\",\"host\",\"rules\",\"websocket_port\",\"functions_emulator\",\"seed_from_export\",\"project_id\",\"single_project_mode\"],\"joinArgs\":false,\"shell\":false,\"port\":8080}"}}
+[info] i  firestore: Firestore Emulator logging to firestore-debug.log {"metadata":{"emulator":{"name":"firestore"},"message":"Firestore Emulator logging to \u001b[1mfirestore-debug.log\u001b[22m"}}
+[debug] [2025-09-30T02:28:52.420Z] Sep 30, 2025 11:28:52 AM com.google.cloud.datastore.emulator.firestore.websocket.WebSocketServer start
+INFO: Started WebSocket server on ws://127.0.0.1:9150
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Sep 30, 2025 11:28:52 AM com.google.cloud.datastore.emulator.firestore.websocket.WebSocketServer start\nINFO: Started WebSocket server on ws://127.0.0.1:9150\n"}}
+[debug] [2025-09-30T02:28:52.430Z] API endpoint: http:// {"metadata":{"emulator":{"name":"firestore"},"message":"API endpoint: http://"}}
+[debug] [2025-09-30T02:28:52.430Z] 127.0.0.1:8080
+If you are using a library that supports the FIRESTORE_EMULATOR_HOST environment variable, run:
+
+   export FIRESTORE_EMULATOR_HOST=127.0.0.1:8080
+
+If you are running a Firestore in Datastore Mode project, run:
+
+   export DATASTORE_EMULATOR_HOST=127.0.0.1:8080
+
+Note: Support for Datastore Mode is in preview. If you encounter any bugs please file at https://github.com/firebase/firebase-tools/issues.
+Dev App Server is now running.
+
+ {"metadata":{"emulator":{"name":"firestore"},"message":"127.0.0.1:8080\nIf you are using a library that supports the FIRESTORE_EMULATOR_HOST environment variable, run:\n\n   export FIRESTORE_EMULATOR_HOST=127.0.0.1:8080\n\nIf you are running a Firestore in Datastore Mode project, run:\n\n   export DATASTORE_EMULATOR_HOST=127.0.0.1:8080\n\nNote: Support for Datastore Mode is in preview. If you encounter any bugs please file at https://github.com/firebase/firebase-tools/issues.\nDev App Server is now running.\n\n"}}
+[info] ✔  firestore: Firestore Emulator UI websocket is running on 9150. {"metadata":{"emulator":{"name":"firestore"},"message":"Firestore Emulator UI websocket is running on 9150."}}
+[debug] [2025-09-30T02:28:54.612Z] Ignoring unsupported arg: port {"metadata":{"emulator":{"name":"storage"},"message":"Ignoring unsupported arg: port"}}
+[debug] [2025-09-30T02:28:54.983Z] Temp file directory for storage emulator: /var/folders/l1/blydpfmj59jfbdr3wnmft9000000gn/T/firebase/storage/blobs {"metadata":{"emulator":{"name":"storage"},"message":"Temp file directory for storage emulator: /var/folders/l1/blydpfmj59jfbdr3wnmft9000000gn/T/firebase/storage/blobs"}}
+[debug] [2025-09-30T02:28:54.985Z] Checked if tokens are valid: true, expires at: 1759200916189
+[debug] [2025-09-30T02:28:54.985Z] Checked if tokens are valid: true, expires at: 1759200916189
+[debug] [2025-09-30T02:28:54.985Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/agentlink-391f7/sites 
+[debug] [2025-09-30T02:28:55.933Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/agentlink-391f7/sites 200
+[debug] [2025-09-30T02:28:55.933Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/agentlink-391f7/sites {"sites":[{"name":"projects/agentlink-391f7/sites/agentlink-391f7","defaultUrl":"https://agentlink-391f7.web.app","type":"DEFAULT_SITE"}]}
+[debug] [2025-09-30T02:28:55.933Z] Checked if tokens are valid: true, expires at: 1759200916189
+[debug] [2025-09-30T02:28:55.933Z] Checked if tokens are valid: true, expires at: 1759200916189
+[debug] [2025-09-30T02:28:55.933Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/agentlink-391f7/webApps/-/config [none]
+[debug] [2025-09-30T02:28:56.440Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/agentlink-391f7/webApps/-/config 200
+[debug] [2025-09-30T02:28:56.440Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/agentlink-391f7/webApps/-/config {"projectId":"agentlink-391f7","storageBucket":"agentlink-391f7.firebasestorage.app","apiKey":"AIzaSyAIPJqxeNyAhe-SqmsLxb_xYt4JT5vOhoE","authDomain":"agentlink-391f7.firebaseapp.com","messagingSenderId":"119524999553"}
+[debug] [2025-09-30T02:28:56.451Z] Checked if tokens are valid: true, expires at: 1759200916189
+[debug] [2025-09-30T02:28:56.451Z] Checked if tokens are valid: true, expires at: 1759200916189
+[debug] [2025-09-30T02:28:56.452Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/agentlink-391f7 [none]
+[debug] [2025-09-30T02:28:56.813Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/agentlink-391f7 200
+[debug] [2025-09-30T02:28:56.813Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/agentlink-391f7 {"projectId":"agentlink-391f7","projectNumber":"119524999553","displayName":"AgentLink","name":"projects/agentlink-391f7","resources":{"hostingSite":"agentlink-391f7"},"state":"ACTIVE","etag":"1_5a825c08-0674-4f33-838c-3c7bab9733a6"}
+[info] i  hosting[agentlink-391f7]: Serving hosting files from: web-dashboard/dist {"metadata":{"emulator":{"name":"hosting"},"message":"Serving hosting files from: \u001b[1mweb-dashboard/dist\u001b[22m"}}
+[info] ✔  hosting[agentlink-391f7]: Local server: http://127.0.0.1:5002 {"metadata":{"emulator":{"name":"hosting"},"message":"Local server: \u001b[4m\u001b[1mhttp://127.0.0.1:5002\u001b[22m\u001b[24m"}}
+[info] i  ui: downloading ui-v1.14.0.zip... {"metadata":{"emulator":{"name":"ui"},"message":"downloading ui-v1.14.0.zip..."}}
+[debug] [2025-09-30T02:28:56.854Z] >>> [apiv2][query] GET https://storage.googleapis.com/firebase-preview-drop/emulator/ui-v1.14.0.zip 
+[debug] [2025-09-30T02:28:57.098Z] <<< [apiv2][status] GET https://storage.googleapis.com/firebase-preview-drop/emulator/ui-v1.14.0.zip 200
+[debug] [2025-09-30T02:28:57.099Z] <<< [apiv2][body] GET https://storage.googleapis.com/firebase-preview-drop/emulator/ui-v1.14.0.zip [stream]
+[debug] [2025-09-30T02:28:57.241Z] Data is 3615311
+[debug] [2025-09-30T02:28:57.241Z] [unzip] Entry: client/ (compressed_size=0 bytes, uncompressed_size=0 bytes)
+[debug] [2025-09-30T02:28:57.241Z] [unzip] Processing entry: client/
+[debug] [2025-09-30T02:28:57.241Z] [unzip] mkdir: /Users/hogeoning/.cache/firebase/emulators/ui-v1.14.0/client/
+[debug] [2025-09-30T02:28:57.241Z] [unzip] Entry: client/favicon-16x16.png (compressed_size=293 bytes, uncompressed_size=293 bytes)
+[debug] [2025-09-30T02:28:57.241Z] [unzip] Processing entry: client/favicon-16x16.png
+[debug] [2025-09-30T02:28:57.241Z] [unzip] else mkdir: /Users/hogeoning/.cache/firebase/emulators/ui-v1.14.0/client
+[debug] [2025-09-30T02:28:57.241Z] [unzip] Writing file: /Users/hogeoning/.cache/firebase/emulators/ui-v1.14.0/client/favicon-16x16.png
+[debug] [2025-09-30T02:28:57.242Z] [unzip] Entry: client/safari-pinned-tab.svg (compressed_size=1433 bytes, uncompressed_size=2611 bytes)
+[debug] [2025-09-30T02:28:57.242Z] [unzip] Processing entry: client/safari-pinned-tab.svg
+[debug] [2025-09-30T02:28:57.242Z] [unzip] else mkdir: /Users/hogeoning/.cache/firebase/emulators/ui-v1.14.0/client
+[debug] [2025-09-30T02:28:57.242Z] [unzip] deflating: /Users/hogeoning/.cache/firebase/emulators/ui-v1.14.0/client/safari-pinned-tab.svg
+[debug] [2025-09-30T02:28:57.243Z] [unzip] Entry: client/favicon.ico (compressed_size=2933 bytes, uncompressed_size=13294 bytes)
+[debug] [2025-09-30T02:28:57.243Z] [unzip] Processing entry: client/favicon.ico
+[debug] [2025-09-30T02:28:57.243Z] [unzip] else mkdir: /Users/hogeoning/.cache/firebase/emulators/ui-v1.14.0/client
+[debug] [2025-09-30T02:28:57.243Z] [unzip] deflating: /Users/hogeoning/.cache/firebase/emulators/ui-v1.14.0/client/favicon.ico
+[debug] [2025-09-30T02:28:57.244Z] [unzip] Entry: client/index.html (compressed_size=1363 bytes, uncompressed_size=3071 bytes)
+[debug] [2025-09-30T02:28:57.244Z] [unzip] Processing entry: client/index.html
+[debug] [2025-09-30T02:28:57.244Z] [unzip] else mkdir: /Users/hogeoning/.cache/firebase/emulators/ui-v1.14.0/client
+[debug] [2025-09-30T02:28:57.244Z] [unzip] deflating: /Users/hogeoning/.cache/firebase/emulators/ui-v1.14.0/client/index.html
+[debug] [2025-09-30T02:28:57.244Z] [unzip] Entry: client/android-chrome-192x192.png (compressed_size=2684 bytes, uncompressed_size=2684 bytes)
+[debug] [2025-09-30T02:28:57.244Z] [unzip] Processing entry: client/android-chrome-192x192.png
+[debug] [2025-09-30T02:28:57.244Z] [unzip] else mkdir: /Users/hogeoning/.cache/firebase/emulators/ui-v1.14.0/client
+[debug] [2025-09-30T02:28:57.244Z] [unzip] Writing file: /Users/hogeoning/.cache/firebase/emulators/ui-v1.14.0/client/android-chrome-192x192.png
+[debug] [2025-09-30T02:28:57.244Z] [unzip] Entry: client/apple-touch-icon.png (compressed_size=2123 bytes, uncompressed_size=2152 bytes)
+[debug] [2025-09-30T02:28:57.244Z] [unzip] Processing entry: client/apple-touch-icon.png
+[debug] [2025-09-30T02:28:57.244Z] [unzip] else mkdir: /Users/hogeoning/.cache/firebase/emulators/ui-v1.14.0/client
+[debug] [2025-09-30T02:28:57.244Z] [unzip] deflating: /Users/hogeoning/.cache/firebase/emulators/ui-v1.14.0/client/apple-touch-icon.png
+[debug] [2025-09-30T02:28:57.245Z] [unzip] Entry: client/android-chrome-512x512.png (compressed_size=5369 bytes, uncompressed_size=5411 bytes)
+[debug] [2025-09-30T02:28:57.245Z] [unzip] Processing entry: client/android-chrome-512x512.png
+[debug] [2025-09-30T02:28:57.245Z] [unzip] else mkdir: /Users/hogeoning/.cache/firebase/emulators/ui-v1.14.0/client
+[debug] [2025-09-30T02:28:57.245Z] [unzip] deflating: /Users/hogeoning/.cache/firebase/emulators/ui-v1.14.0/client/android-chrome-512x512.png
+[debug] [2025-09-30T02:28:57.245Z] [unzip] Entry: client/manifest.json (compressed_size=245 bytes, uncompressed_size=551 bytes)
+[debug] [2025-09-30T02:28:57.245Z] [unzip] Processing entry: client/manifest.json
+[debug] [2025-09-30T02:28:57.245Z] [unzip] else mkdir: /Users/hogeoning/.cache/firebase/emulators/ui-v1.14.0/client
+[debug] [2025-09-30T02:28:57.245Z] [unzip] deflating: /Users/hogeoning/.cache/firebase/emulators/ui-v1.14.0/client/manifest.json
+[debug] [2025-09-30T02:28:57.246Z] [unzip] Entry: client/robots.txt (compressed_size=26 bytes, uncompressed_size=26 bytes)
+[debug] [2025-09-30T02:28:57.246Z] [unzip] Processing entry: client/robots.txt
+[debug] [2025-09-30T02:28:57.246Z] [unzip] else mkdir: /Users/hogeoning/.cache/firebase/emulators/ui-v1.14.0/client
+[debug] [2025-09-30T02:28:57.246Z] [unzip] Writing file: /Users/hogeoning/.cache/firebase/emulators/ui-v1.14.0/client/robots.txt
+[debug] [2025-09-30T02:28:57.246Z] [unzip] Entry: client/mstile-150x150.png (compressed_size=2034 bytes, uncompressed_size=2034 bytes)
+[debug] [2025-09-30T02:28:57.246Z] [unzip] Processing entry: client/mstile-150x150.png
+[debug] [2025-09-30T02:28:57.246Z] [unzip] else mkdir: /Users/hogeoning/.cache/firebase/emulators/ui-v1.14.0/client
+[debug] [2025-09-30T02:28:57.246Z] [unzip] Writing file: /Users/hogeoning/.cache/firebase/emulators/ui-v1.14.0/client/mstile-150x150.png
+[debug] [2025-09-30T02:28:57.246Z] [unzip] Entry: client/assets/ (compressed_size=0 bytes, uncompressed_size=0 bytes)
+[debug] [2025-09-30T02:28:57.246Z] [unzip] Processing entry: client/assets/
+[debug] [2025-09-30T02:28:57.246Z] [unzip] mkdir: /Users/hogeoning/.cache/firebase/emulators/ui-v1.14.0/client/assets/
+[debug] [2025-09-30T02:28:57.246Z] [unzip] Entry: client/assets/index-ClZTY_JS.js.map (compressed_size=2328270 bytes, uncompressed_size=9947004 bytes)
+[debug] [2025-09-30T02:28:57.246Z] [unzip] Processing entry: client/assets/index-ClZTY_JS.js.map
+[debug] [2025-09-30T02:28:57.246Z] [unzip] else mkdir: /Users/hogeoning/.cache/firebase/emulators/ui-v1.14.0/client/assets
+[debug] [2025-09-30T02:28:57.246Z] [unzip] deflating: /Users/hogeoning/.cache/firebase/emulators/ui-v1.14.0/client/assets/index-ClZTY_JS.js.map
+[debug] [2025-09-30T02:28:57.265Z] [unzip] Entry: client/assets/index-ClZTY_JS.js (compressed_size=567195 bytes, uncompressed_size=2035940 bytes)
+[debug] [2025-09-30T02:28:57.265Z] [unzip] Processing entry: client/assets/index-ClZTY_JS.js
+[debug] [2025-09-30T02:28:57.265Z] [unzip] else mkdir: /Users/hogeoning/.cache/firebase/emulators/ui-v1.14.0/client/assets
+[debug] [2025-09-30T02:28:57.265Z] [unzip] deflating: /Users/hogeoning/.cache/firebase/emulators/ui-v1.14.0/client/assets/index-ClZTY_JS.js
+[debug] [2025-09-30T02:28:57.270Z] [unzip] Entry: client/assets/index-BdgySamB.css (compressed_size=35979 bytes, uncompressed_size=298654 bytes)
+[debug] [2025-09-30T02:28:57.270Z] [unzip] Processing entry: client/assets/index-BdgySamB.css
+[debug] [2025-09-30T02:28:57.270Z] [unzip] else mkdir: /Users/hogeoning/.cache/firebase/emulators/ui-v1.14.0/client/assets
+[debug] [2025-09-30T02:28:57.270Z] [unzip] deflating: /Users/hogeoning/.cache/firebase/emulators/ui-v1.14.0/client/assets/index-BdgySamB.css
+[debug] [2025-09-30T02:28:57.271Z] [unzip] Entry: client/assets/extensions/ (compressed_size=0 bytes, uncompressed_size=0 bytes)
+[debug] [2025-09-30T02:28:57.271Z] [unzip] Processing entry: client/assets/extensions/
+[debug] [2025-09-30T02:28:57.271Z] [unzip] mkdir: /Users/hogeoning/.cache/firebase/emulators/ui-v1.14.0/client/assets/extensions/
+[debug] [2025-09-30T02:28:57.271Z] [unzip] Entry: client/assets/extensions/default-extension.png (compressed_size=1646 bytes, uncompressed_size=1657 bytes)
+[debug] [2025-09-30T02:28:57.271Z] [unzip] Processing entry: client/assets/extensions/default-extension.png
+[debug] [2025-09-30T02:28:57.271Z] [unzip] else mkdir: /Users/hogeoning/.cache/firebase/emulators/ui-v1.14.0/client/assets/extensions
+[debug] [2025-09-30T02:28:57.271Z] [unzip] deflating: /Users/hogeoning/.cache/firebase/emulators/ui-v1.14.0/client/assets/extensions/default-extension.png
+[debug] [2025-09-30T02:28:57.271Z] [unzip] Entry: client/assets/img/ (compressed_size=0 bytes, uncompressed_size=0 bytes)
+[debug] [2025-09-30T02:28:57.271Z] [unzip] Processing entry: client/assets/img/
+[debug] [2025-09-30T02:28:57.271Z] [unzip] mkdir: /Users/hogeoning/.cache/firebase/emulators/ui-v1.14.0/client/assets/img/
+[debug] [2025-09-30T02:28:57.271Z] [unzip] Entry: client/assets/img/database.png (compressed_size=29449 bytes, uncompressed_size=29988 bytes)
+[debug] [2025-09-30T02:28:57.271Z] [unzip] Processing entry: client/assets/img/database.png
+[debug] [2025-09-30T02:28:57.271Z] [unzip] else mkdir: /Users/hogeoning/.cache/firebase/emulators/ui-v1.14.0/client/assets/img
+[debug] [2025-09-30T02:28:57.271Z] [unzip] deflating: /Users/hogeoning/.cache/firebase/emulators/ui-v1.14.0/client/assets/img/database.png
+[debug] [2025-09-30T02:28:57.272Z] [unzip] Entry: client/assets/provider-icons/ (compressed_size=0 bytes, uncompressed_size=0 bytes)
+[debug] [2025-09-30T02:28:57.272Z] [unzip] Processing entry: client/assets/provider-icons/
+[debug] [2025-09-30T02:28:57.272Z] [unzip] mkdir: /Users/hogeoning/.cache/firebase/emulators/ui-v1.14.0/client/assets/provider-icons/
+[debug] [2025-09-30T02:28:57.272Z] [unzip] Entry: client/assets/provider-icons/auth_service_saml.svg (compressed_size=575 bytes, uncompressed_size=1226 bytes)
+[debug] [2025-09-30T02:28:57.272Z] [unzip] Processing entry: client/assets/provider-icons/auth_service_saml.svg
+[debug] [2025-09-30T02:28:57.272Z] [unzip] else mkdir: /Users/hogeoning/.cache/firebase/emulators/ui-v1.14.0/client/assets/provider-icons
+[debug] [2025-09-30T02:28:57.272Z] [unzip] deflating: /Users/hogeoning/.cache/firebase/emulators/ui-v1.14.0/client/assets/provider-icons/auth_service_saml.svg
+[debug] [2025-09-30T02:28:57.272Z] [unzip] Entry: client/assets/provider-icons/auth_service_phone.svg (compressed_size=261 bytes, uncompressed_size=414 bytes)
+[debug] [2025-09-30T02:28:57.272Z] [unzip] Processing entry: client/assets/provider-icons/auth_service_phone.svg
+[debug] [2025-09-30T02:28:57.272Z] [unzip] else mkdir: /Users/hogeoning/.cache/firebase/emulators/ui-v1.14.0/client/assets/provider-icons
+[debug] [2025-09-30T02:28:57.272Z] [unzip] deflating: /Users/hogeoning/.cache/firebase/emulators/ui-v1.14.0/client/assets/provider-icons/auth_service_phone.svg
+[debug] [2025-09-30T02:28:57.272Z] [unzip] Entry: client/assets/provider-icons/auth_service_facebook.svg (compressed_size=289 bytes, uncompressed_size=457 bytes)
+[debug] [2025-09-30T02:28:57.272Z] [unzip] Processing entry: client/assets/provider-icons/auth_service_facebook.svg
+[debug] [2025-09-30T02:28:57.272Z] [unzip] else mkdir: /Users/hogeoning/.cache/firebase/emulators/ui-v1.14.0/client/assets/provider-icons
+[debug] [2025-09-30T02:28:57.272Z] [unzip] deflating: /Users/hogeoning/.cache/firebase/emulators/ui-v1.14.0/client/assets/provider-icons/auth_service_facebook.svg
+[debug] [2025-09-30T02:28:57.272Z] [unzip] Entry: client/assets/provider-icons/auth_service_game_center.svg (compressed_size=991 bytes, uncompressed_size=3921 bytes)
+[debug] [2025-09-30T02:28:57.272Z] [unzip] Processing entry: client/assets/provider-icons/auth_service_game_center.svg
+[debug] [2025-09-30T02:28:57.272Z] [unzip] else mkdir: /Users/hogeoning/.cache/firebase/emulators/ui-v1.14.0/client/assets/provider-icons
+[debug] [2025-09-30T02:28:57.272Z] [unzip] deflating: /Users/hogeoning/.cache/firebase/emulators/ui-v1.14.0/client/assets/provider-icons/auth_service_game_center.svg
+[debug] [2025-09-30T02:28:57.272Z] [unzip] Entry: client/assets/provider-icons/auth_service_apple.svg (compressed_size=230 bytes, uncompressed_size=334 bytes)
+[debug] [2025-09-30T02:28:57.272Z] [unzip] Processing entry: client/assets/provider-icons/auth_service_apple.svg
+[debug] [2025-09-30T02:28:57.272Z] [unzip] else mkdir: /Users/hogeoning/.cache/firebase/emulators/ui-v1.14.0/client/assets/provider-icons
+[debug] [2025-09-30T02:28:57.273Z] [unzip] deflating: /Users/hogeoning/.cache/firebase/emulators/ui-v1.14.0/client/assets/provider-icons/auth_service_apple.svg
+[debug] [2025-09-30T02:28:57.273Z] [unzip] Entry: client/assets/provider-icons/auth_service_github.svg (compressed_size=466 bytes, uncompressed_size=838 bytes)
+[debug] [2025-09-30T02:28:57.273Z] [unzip] Processing entry: client/assets/provider-icons/auth_service_github.svg
+[debug] [2025-09-30T02:28:57.273Z] [unzip] else mkdir: /Users/hogeoning/.cache/firebase/emulators/ui-v1.14.0/client/assets/provider-icons
+[debug] [2025-09-30T02:28:57.273Z] [unzip] deflating: /Users/hogeoning/.cache/firebase/emulators/ui-v1.14.0/client/assets/provider-icons/auth_service_github.svg
+[debug] [2025-09-30T02:28:57.273Z] [unzip] Entry: client/assets/provider-icons/auth_service_mslive.svg (compressed_size=203 bytes, uncompressed_size=378 bytes)
+[debug] [2025-09-30T02:28:57.273Z] [unzip] Processing entry: client/assets/provider-icons/auth_service_mslive.svg
+[debug] [2025-09-30T02:28:57.273Z] [unzip] else mkdir: /Users/hogeoning/.cache/firebase/emulators/ui-v1.14.0/client/assets/provider-icons
+[debug] [2025-09-30T02:28:57.273Z] [unzip] deflating: /Users/hogeoning/.cache/firebase/emulators/ui-v1.14.0/client/assets/provider-icons/auth_service_mslive.svg
+[debug] [2025-09-30T02:28:57.273Z] [unzip] Entry: client/assets/provider-icons/auth_service_yahoo.svg (compressed_size=577 bytes, uncompressed_size=1182 bytes)
+[debug] [2025-09-30T02:28:57.273Z] [unzip] Processing entry: client/assets/provider-icons/auth_service_yahoo.svg
+[debug] [2025-09-30T02:28:57.273Z] [unzip] else mkdir: /Users/hogeoning/.cache/firebase/emulators/ui-v1.14.0/client/assets/provider-icons
+[debug] [2025-09-30T02:28:57.273Z] [unzip] deflating: /Users/hogeoning/.cache/firebase/emulators/ui-v1.14.0/client/assets/provider-icons/auth_service_yahoo.svg
+[debug] [2025-09-30T02:28:57.273Z] [unzip] Entry: client/assets/provider-icons/auth_service_twitter.svg (compressed_size=444 bytes, uncompressed_size=751 bytes)
+[debug] [2025-09-30T02:28:57.274Z] [unzip] Processing entry: client/assets/provider-icons/auth_service_twitter.svg
+[debug] [2025-09-30T02:28:57.274Z] [unzip] else mkdir: /Users/hogeoning/.cache/firebase/emulators/ui-v1.14.0/client/assets/provider-icons
+[debug] [2025-09-30T02:28:57.274Z] [unzip] deflating: /Users/hogeoning/.cache/firebase/emulators/ui-v1.14.0/client/assets/provider-icons/auth_service_twitter.svg
+[debug] [2025-09-30T02:28:57.274Z] [unzip] Entry: client/assets/provider-icons/auth_service_play_games.svg (compressed_size=565 bytes, uncompressed_size=1173 bytes)
+[debug] [2025-09-30T02:28:57.274Z] [unzip] Processing entry: client/assets/provider-icons/auth_service_play_games.svg
+[debug] [2025-09-30T02:28:57.274Z] [unzip] else mkdir: /Users/hogeoning/.cache/firebase/emulators/ui-v1.14.0/client/assets/provider-icons
+[debug] [2025-09-30T02:28:57.274Z] [unzip] deflating: /Users/hogeoning/.cache/firebase/emulators/ui-v1.14.0/client/assets/provider-icons/auth_service_play_games.svg
+[debug] [2025-09-30T02:28:57.274Z] [unzip] Entry: client/assets/provider-icons/auth_service_email.svg (compressed_size=228 bytes, uncompressed_size=326 bytes)
+[debug] [2025-09-30T02:28:57.274Z] [unzip] Processing entry: client/assets/provider-icons/auth_service_email.svg
+[debug] [2025-09-30T02:28:57.274Z] [unzip] else mkdir: /Users/hogeoning/.cache/firebase/emulators/ui-v1.14.0/client/assets/provider-icons
+[debug] [2025-09-30T02:28:57.274Z] [unzip] deflating: /Users/hogeoning/.cache/firebase/emulators/ui-v1.14.0/client/assets/provider-icons/auth_service_email.svg
+[debug] [2025-09-30T02:28:57.275Z] [unzip] Entry: client/assets/provider-icons/auth_service_google.svg (compressed_size=409 bytes, uncompressed_size=720 bytes)
+[debug] [2025-09-30T02:28:57.275Z] [unzip] Processing entry: client/assets/provider-icons/auth_service_google.svg
+[debug] [2025-09-30T02:28:57.275Z] [unzip] else mkdir: /Users/hogeoning/.cache/firebase/emulators/ui-v1.14.0/client/assets/provider-icons
+[debug] [2025-09-30T02:28:57.275Z] [unzip] deflating: /Users/hogeoning/.cache/firebase/emulators/ui-v1.14.0/client/assets/provider-icons/auth_service_google.svg
+[debug] [2025-09-30T02:28:57.275Z] [unzip] Entry: client/assets/provider-icons/auth_service_oidc.svg (compressed_size=414 bytes, uncompressed_size=858 bytes)
+[debug] [2025-09-30T02:28:57.275Z] [unzip] Processing entry: client/assets/provider-icons/auth_service_oidc.svg
+[debug] [2025-09-30T02:28:57.275Z] [unzip] else mkdir: /Users/hogeoning/.cache/firebase/emulators/ui-v1.14.0/client/assets/provider-icons
+[debug] [2025-09-30T02:28:57.275Z] [unzip] deflating: /Users/hogeoning/.cache/firebase/emulators/ui-v1.14.0/client/assets/provider-icons/auth_service_oidc.svg
+[debug] [2025-09-30T02:28:57.275Z] [unzip] Entry: client/browserconfig.xml (compressed_size=491 bytes, uncompressed_size=822 bytes)
+[debug] [2025-09-30T02:28:57.275Z] [unzip] Processing entry: client/browserconfig.xml
+[debug] [2025-09-30T02:28:57.275Z] [unzip] else mkdir: /Users/hogeoning/.cache/firebase/emulators/ui-v1.14.0/client
+[debug] [2025-09-30T02:28:57.275Z] [unzip] deflating: /Users/hogeoning/.cache/firebase/emulators/ui-v1.14.0/client/browserconfig.xml
+[debug] [2025-09-30T02:28:57.275Z] [unzip] Entry: client/favicon-32x32.png (compressed_size=475 bytes, uncompressed_size=475 bytes)
+[debug] [2025-09-30T02:28:57.275Z] [unzip] Processing entry: client/favicon-32x32.png
+[debug] [2025-09-30T02:28:57.275Z] [unzip] else mkdir: /Users/hogeoning/.cache/firebase/emulators/ui-v1.14.0/client
+[debug] [2025-09-30T02:28:57.275Z] [unzip] Writing file: /Users/hogeoning/.cache/firebase/emulators/ui-v1.14.0/client/favicon-32x32.png
+[debug] [2025-09-30T02:28:57.275Z] [unzip] Entry: server/ (compressed_size=0 bytes, uncompressed_size=0 bytes)
+[debug] [2025-09-30T02:28:57.275Z] [unzip] Processing entry: server/
+[debug] [2025-09-30T02:28:57.275Z] [unzip] mkdir: /Users/hogeoning/.cache/firebase/emulators/ui-v1.14.0/server/
+[debug] [2025-09-30T02:28:57.275Z] [unzip] Entry: server/server.mjs.map (compressed_size=296496 bytes, uncompressed_size=1355667 bytes)
+[debug] [2025-09-30T02:28:57.275Z] [unzip] Processing entry: server/server.mjs.map
+[debug] [2025-09-30T02:28:57.275Z] [unzip] else mkdir: /Users/hogeoning/.cache/firebase/emulators/ui-v1.14.0/server
+[debug] [2025-09-30T02:28:57.275Z] [unzip] deflating: /Users/hogeoning/.cache/firebase/emulators/ui-v1.14.0/server/server.mjs.map
+[debug] [2025-09-30T02:28:57.278Z] [unzip] Entry: server/server.mjs (compressed_size=315701 bytes, uncompressed_size=1172682 bytes)
+[debug] [2025-09-30T02:28:57.278Z] [unzip] Processing entry: server/server.mjs
+[debug] [2025-09-30T02:28:57.278Z] [unzip] else mkdir: /Users/hogeoning/.cache/firebase/emulators/ui-v1.14.0/server
+[debug] [2025-09-30T02:28:57.278Z] [unzip] deflating: /Users/hogeoning/.cache/firebase/emulators/ui-v1.14.0/server/server.mjs
+[debug] [2025-09-30T02:28:57.284Z] [unzip] Entry: server/assets/ (compressed_size=0 bytes, uncompressed_size=0 bytes)
+[debug] [2025-09-30T02:28:57.284Z] [unzip] Processing entry: server/assets/
+[debug] [2025-09-30T02:28:57.284Z] [unzip] mkdir: /Users/hogeoning/.cache/firebase/emulators/ui-v1.14.0/server/assets/
+[debug] [2025-09-30T02:28:57.285Z] [unzip] Entry: server/assets/multipart-parser-DGCUZdXu.mjs.map (compressed_size=4791 bytes, uncompressed_size=17918 bytes)
+[debug] [2025-09-30T02:28:57.285Z] [unzip] Processing entry: server/assets/multipart-parser-DGCUZdXu.mjs.map
+[debug] [2025-09-30T02:28:57.285Z] [unzip] else mkdir: /Users/hogeoning/.cache/firebase/emulators/ui-v1.14.0/server/assets
+[debug] [2025-09-30T02:28:57.285Z] [unzip] deflating: /Users/hogeoning/.cache/firebase/emulators/ui-v1.14.0/server/assets/multipart-parser-DGCUZdXu.mjs.map
+[debug] [2025-09-30T02:28:57.285Z] [unzip] Entry: server/assets/multipart-parser-DGCUZdXu.mjs (compressed_size=2621 bytes, uncompressed_size=10390 bytes)
+[debug] [2025-09-30T02:28:57.285Z] [unzip] Processing entry: server/assets/multipart-parser-DGCUZdXu.mjs
+[debug] [2025-09-30T02:28:57.285Z] [unzip] else mkdir: /Users/hogeoning/.cache/firebase/emulators/ui-v1.14.0/server/assets
+[debug] [2025-09-30T02:28:57.285Z] [unzip] deflating: /Users/hogeoning/.cache/firebase/emulators/ui-v1.14.0/server/assets/multipart-parser-DGCUZdXu.mjs
+[info] i  ui: Removing outdated emulator files: ui-v1.15.0 {"metadata":{"emulator":{"name":"ui"},"message":"Removing outdated emulator files: ui-v1.15.0"}}
+[info] i  ui: Removing outdated emulator files: ui-v1.15.0.zip {"metadata":{"emulator":{"name":"ui"},"message":"Removing outdated emulator files: ui-v1.15.0.zip"}}
+[debug] [2025-09-30T02:28:57.307Z] [Extensions] Connecting Extensions emulator, this is a noop.
+[info] i  functions: Watching "/Users/hogeoning/Desktop/AgentLink/functions" for Cloud Functions... {"metadata":{"emulator":{"name":"functions"},"message":"Watching \"/Users/hogeoning/Desktop/AgentLink/functions\" for Cloud Functions..."}}
+[debug] [2025-09-30T02:28:57.309Z] Validating nodejs source
+[warn] ⚠  functions: package.json indicates an outdated version of firebase-functions. Please upgrade using npm install --save firebase-functions@latest in your functions directory. 
+[warn] ⚠  functions: Please note that there will be breaking changes when you upgrade. 
+[debug] [2025-09-30T02:28:57.613Z] > [functions] package.json contents: {
+  "name": "functions",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "engines": {
+    "node": "^20"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "build:watch": "tsc -p tsconfig.json --watch --preserveWatchOutput",
+    "lint": "eslint \"src/**/*.{ts,tsx}\"",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "tsx --test src/lib/title.test.ts src/lib/orders.test.ts"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "firebase-admin": "^12.0.0",
+    "firebase-functions": "^4.5.0"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.17",
+    "@types/express": "^4.17.21"
+  }
+}
+[debug] [2025-09-30T02:28:57.614Z] Building nodejs source
+[debug] [2025-09-30T02:28:57.614Z] Failed to find version of module node: reached end of search path /Users/hogeoning/Desktop/AgentLink/functions/node_modules
+[warn] ⚠  functions: Your requested "node" version "20" doesn't match your global version "22". Using node@22 from host. 
+[info] i  functions: You are using a version of firebase-functions SDK (4.9.0) that does not have support for the newest Firebase Extensions features. Please update firebase-functions SDK to >=5.1.0 to use them correctly 
+[debug] [2025-09-30T02:28:57.615Z] Could not find functions.yaml. Must use http discovery
+[debug] [2025-09-30T02:28:57.617Z] Found firebase-functions binary at '/Users/hogeoning/Desktop/AgentLink/node_modules/.bin/firebase-functions'
+[info] Serving at port 8925
+
+[debug] [2025-09-30T02:28:58.031Z] Got response from /__/functions.yaml {"endpoints":{"aiIndex":{"availableMemoryMb":256,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","region":["us-central1"],"labels":{},"httpsTrigger":{},"entryPoint":"aiIndex"},"api":{"availableMemoryMb":256,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","region":["us-central1"],"labels":{},"httpsTrigger":{},"entryPoint":"api"},"dashboardApp":{"availableMemoryMb":256,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","region":["us-central1"],"labels":{},"httpsTrigger":{},"entryPoint":"dashboardApp"},"menuCreated":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"eventTrigger":{"eventType":"google.cloud.firestore.document.v1.created","eventFilters":{"database":"(default)","namespace":"(default)"},"eventFilterPathPatterns":{"document":"menus/{menuId}"},"retry":false},"entryPoint":"menuCreated"},"menuUpdated":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"eventTrigger":{"eventType":"google.cloud.firestore.document.v1.updated","eventFilters":{"database":"(default)","namespace":"(default)"},"eventFilterPathPatterns":{"document":"menus/{menuId}"},"retry":false},"entryPoint":"menuUpdated"}},"specVersion":"v1alpha1","requiredAPIs":[]}
+[info] ✔  functions: Loaded functions definitions from source: aiIndex, api, dashboardApp, menuCreated, menuUpdated. {"metadata":{"emulator":{"name":"functions"},"message":"Loaded functions definitions from source: aiIndex, api, dashboardApp, menuCreated, menuUpdated."}}
+[info] ✔  functions[us-central1-aiIndex]: http function initialized (http://127.0.0.1:5001/agentlink-391f7/us-central1/aiIndex). {"metadata":{"emulator":{"name":"functions"},"message":"\u001b[1mhttp\u001b[22m function initialized (http://127.0.0.1:5001/agentlink-391f7/us-central1/aiIndex)."}}
+[info] ✔  functions[us-central1-api]: http function initialized (http://127.0.0.1:5001/agentlink-391f7/us-central1/api). {"metadata":{"emulator":{"name":"functions"},"message":"\u001b[1mhttp\u001b[22m function initialized (http://127.0.0.1:5001/agentlink-391f7/us-central1/api)."}}
+[info] ✔  functions[us-central1-dashboardApp]: http function initialized (http://127.0.0.1:5001/agentlink-391f7/us-central1/dashboardApp). {"metadata":{"emulator":{"name":"functions"},"message":"\u001b[1mhttp\u001b[22m function initialized (http://127.0.0.1:5001/agentlink-391f7/us-central1/dashboardApp)."}}
+[debug] [2025-09-30T02:29:02.053Z] Found a v2 firestore trigger.
+[debug] [2025-09-30T02:29:02.053Z] addFirestoreTrigger "{\"eventType\":\"google.cloud.firestore.document.v1.created\",\"database\":\"(default)\",\"namespace\":\"(default)\",\"document\":{\"value\":\"menus/{menuId}\",\"matchType\":\"PATH_PATTERN\"}}"
+[debug] [2025-09-30T02:29:02.053Z] >>> [apiv2][query] POST http://127.0.0.1:8080/emulator/v1/projects/agentlink-391f7/eventarcTrigger?eventarcTriggerId=us-central1-menuCreated-0 [none]
+[debug] [2025-09-30T02:29:02.053Z] >>> [apiv2][body] POST http://127.0.0.1:8080/emulator/v1/projects/agentlink-391f7/eventarcTrigger?eventarcTriggerId=us-central1-menuCreated-0 "{\"eventType\":\"google.cloud.firestore.document.v1.created\",\"database\":\"(default)\",\"namespace\":\"(default)\",\"document\":{\"value\":\"menus/{menuId}\",\"matchType\":\"PATH_PATTERN\"}}"
+[debug] [2025-09-30T02:29:02.059Z] Sep 30, 2025 11:29:02 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Sep 30, 2025 11:29:02 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2025-09-30T02:29:02.140Z] Sep 30, 2025 11:29:02 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Sep 30, 2025 11:29:02 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected HTTP/2 connection.\n"}}
+[debug] [2025-09-30T02:29:02.396Z] <<< [apiv2][status] POST http://127.0.0.1:8080/emulator/v1/projects/agentlink-391f7/eventarcTrigger?eventarcTriggerId=us-central1-menuCreated-0 200
+[debug] [2025-09-30T02:29:02.396Z] <<< [apiv2][body] POST http://127.0.0.1:8080/emulator/v1/projects/agentlink-391f7/eventarcTrigger?eventarcTriggerId=us-central1-menuCreated-0 {"eventType":"google.cloud.firestore.document.v1.created","database":"(default)","namespace":"(default)","document":{"value":"menus/{menuId}","matchType":"PATH_PATTERN"}}
+[info] ✔  functions[us-central1-menuCreated]: firestore function initialized. {"metadata":{"emulator":{"name":"functions"},"message":"\u001b[1mfirestore\u001b[22m function initialized."}}
+[debug] [2025-09-30T02:29:02.397Z] Found a v2 firestore trigger.
+[debug] [2025-09-30T02:29:02.397Z] addFirestoreTrigger "{\"eventType\":\"google.cloud.firestore.document.v1.updated\",\"database\":\"(default)\",\"namespace\":\"(default)\",\"document\":{\"value\":\"menus/{menuId}\",\"matchType\":\"PATH_PATTERN\"}}"
+[debug] [2025-09-30T02:29:02.397Z] >>> [apiv2][query] POST http://127.0.0.1:8080/emulator/v1/projects/agentlink-391f7/eventarcTrigger?eventarcTriggerId=us-central1-menuUpdated-0 [none]
+[debug] [2025-09-30T02:29:02.397Z] >>> [apiv2][body] POST http://127.0.0.1:8080/emulator/v1/projects/agentlink-391f7/eventarcTrigger?eventarcTriggerId=us-central1-menuUpdated-0 "{\"eventType\":\"google.cloud.firestore.document.v1.updated\",\"database\":\"(default)\",\"namespace\":\"(default)\",\"document\":{\"value\":\"menus/{menuId}\",\"matchType\":\"PATH_PATTERN\"}}"
+[debug] [2025-09-30T02:29:02.400Z] <<< [apiv2][status] POST http://127.0.0.1:8080/emulator/v1/projects/agentlink-391f7/eventarcTrigger?eventarcTriggerId=us-central1-menuUpdated-0 200
+[debug] [2025-09-30T02:29:02.400Z] <<< [apiv2][body] POST http://127.0.0.1:8080/emulator/v1/projects/agentlink-391f7/eventarcTrigger?eventarcTriggerId=us-central1-menuUpdated-0 {"eventType":"google.cloud.firestore.document.v1.updated","database":"(default)","namespace":"(default)","document":{"value":"menus/{menuId}","matchType":"PATH_PATTERN"}}
+[info] ✔  functions[us-central1-menuUpdated]: firestore function initialized. {"metadata":{"emulator":{"name":"functions"},"message":"\u001b[1mfirestore\u001b[22m function initialized."}}
+[debug] [2025-09-30T02:29:02.403Z] Could not find VSCode notification endpoint: FetchError: request to http://localhost:40001/vscode/notify failed, reason: . If you are not running the Firebase Data Connect VSCode extension, this is expected and not an issue.
+[info] 
+┌─────────────────────────────────────────────────────────────┐
+│ ✔  All emulators ready! It is now safe to connect your app. │
+│ i  View Emulator UI at http://127.0.0.1:4000/               │
+└─────────────────────────────────────────────────────────────┘
+
+┌────────────────┬────────────────┬──────────────────────────────────┐
+│ Emulator       │ Host:Port      │ View in Emulator UI              │
+├────────────────┼────────────────┼──────────────────────────────────┤
+│ Authentication │ 127.0.0.1:9099 │ http://127.0.0.1:4000/auth       │
+├────────────────┼────────────────┼──────────────────────────────────┤
+│ Functions      │ 127.0.0.1:5001 │ http://127.0.0.1:4000/functions  │
+├────────────────┼────────────────┼──────────────────────────────────┤
+│ Firestore      │ 127.0.0.1:8080 │ http://127.0.0.1:4000/firestore  │
+├────────────────┼────────────────┼──────────────────────────────────┤
+│ Hosting        │ 127.0.0.1:5002 │ n/a                              │
+├────────────────┼────────────────┼──────────────────────────────────┤
+│ Storage        │ 127.0.0.1:9199 │ http://127.0.0.1:4000/storage    │
+├────────────────┼────────────────┼──────────────────────────────────┤
+│ Extensions     │ 127.0.0.1:5001 │ http://127.0.0.1:4000/extensions │
+└────────────────┴────────────────┴──────────────────────────────────┘
+  Emulator Hub host: 127.0.0.1 port: 4400
+  Other reserved ports: 4500, 9150
+┌─────────────────────────┬───────────────┬─────────────────────┐
+│ Extension Instance Name │ Extension Ref │ View in Emulator UI │
+└─────────────────────────┴───────────────┴─────────────────────┘
+Issues? Report them at https://github.com/firebase/firebase-tools/issues and attach the *-debug.log files.
+ 
+[debug] [2025-09-30T02:29:03.828Z] Functions emulator received unknown request at path /api/health
+[debug] [2025-09-30T02:29:31.720Z] [work-queue] {"queuedWork":["/agentlink-391f7/us-central1/api/health-2025-09-30T02:29:31.720Z"],"queueLength":1,"runningWork":[],"workRunningCount":0}
+[debug] [2025-09-30T02:29:31.721Z] [work-queue] {"queuedWork":[],"queueLength":0,"runningWork":["/agentlink-391f7/us-central1/api/health-2025-09-30T02:29:31.720Z"],"workRunningCount":1}
+[debug] [2025-09-30T02:29:31.721Z] Accepted request GET /agentlink-391f7/us-central1/api/health --> us-central1-api
+[debug] [2025-09-30T02:29:31.722Z] [functions] Runtime ready! Sending request! {"metadata":{"emulator":{"name":"functions"},"message":"[functions] Runtime ready! Sending request!"}}
+[debug] [2025-09-30T02:29:31.722Z] [functions] Got req.url=/agentlink-391f7/us-central1/api/health, mapping to path=/health {"metadata":{"emulator":{"name":"functions"},"message":"[functions] Got req.url=/agentlink-391f7/us-central1/api/health, mapping to path=/health"}}
+[debug] [2025-09-30T02:29:31.724Z] [worker-pool] addWorker(us-central1-api) {"metadata":{"emulator":{"name":"functions"},"message":"[worker-pool] addWorker(us-central1-api)"}}
+[debug] [2025-09-30T02:29:31.724Z] [worker-pool] Adding worker with key us-central1-api, total=1 {"metadata":{"emulator":{"name":"functions"},"message":"[worker-pool] Adding worker with key us-central1-api, total=1"}}
+[debug] [2025-09-30T02:29:32.170Z] [runtime-status] [81731] Resolved module firebase-admin {"declared":true,"installed":true,"version":"12.7.0","resolution":"/Users/hogeoning/Desktop/AgentLink/node_modules/firebase-admin/lib/index.js"} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-api"},"extension":{},"message":"[runtime-status] [81731] Resolved module firebase-admin {\"declared\":true,\"installed\":true,\"version\":\"12.7.0\",\"resolution\":\"/Users/hogeoning/Desktop/AgentLink/node_modules/firebase-admin/lib/index.js\"}"}}
+[debug] [2025-09-30T02:29:32.170Z] [runtime-status] [81731] Resolved module firebase-functions {"declared":true,"installed":true,"version":"4.9.0","resolution":"/Users/hogeoning/Desktop/AgentLink/node_modules/firebase-functions/lib/v1/index.js"} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-api"},"extension":{},"message":"[runtime-status] [81731] Resolved module firebase-functions {\"declared\":true,\"installed\":true,\"version\":\"4.9.0\",\"resolution\":\"/Users/hogeoning/Desktop/AgentLink/node_modules/firebase-functions/lib/v1/index.js\"}"}}
+[debug] [2025-09-30T02:29:32.170Z] [runtime-status] [81731] Outgoing network have been stubbed. [{"name":"http","status":"mocked"},{"name":"http","status":"mocked"},{"name":"https","status":"mocked"},{"name":"https","status":"mocked"},{"name":"net","status":"mocked"}] {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-api"},"extension":{},"message":"[runtime-status] [81731] Outgoing network have been stubbed. [{\"name\":\"http\",\"status\":\"mocked\"},{\"name\":\"http\",\"status\":\"mocked\"},{\"name\":\"https\",\"status\":\"mocked\"},{\"name\":\"https\",\"status\":\"mocked\"},{\"name\":\"net\",\"status\":\"mocked\"}]"}}
+[debug] [2025-09-30T02:29:32.170Z] [runtime-status] [81731] Resolved module firebase-functions {"declared":true,"installed":true,"version":"4.9.0","resolution":"/Users/hogeoning/Desktop/AgentLink/node_modules/firebase-functions/lib/v1/index.js"} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-api"},"extension":{},"message":"[runtime-status] [81731] Resolved module firebase-functions {\"declared\":true,\"installed\":true,\"version\":\"4.9.0\",\"resolution\":\"/Users/hogeoning/Desktop/AgentLink/node_modules/firebase-functions/lib/v1/index.js\"}"}}
+[debug] [2025-09-30T02:29:32.225Z] [runtime-status] [81731] Checked functions.config() {"config":{}} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-api"},"extension":{},"message":"[runtime-status] [81731] Checked functions.config() {\"config\":{}}"}}
+[debug] [2025-09-30T02:29:32.225Z] [runtime-status] [81731] firebase-functions has been stubbed. {"functionsResolution":{"declared":true,"installed":true,"version":"4.9.0","resolution":"/Users/hogeoning/Desktop/AgentLink/node_modules/firebase-functions/lib/v1/index.js"}} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-api"},"extension":{},"message":"[runtime-status] [81731] firebase-functions has been stubbed. {\"functionsResolution\":{\"declared\":true,\"installed\":true,\"version\":\"4.9.0\",\"resolution\":\"/Users/hogeoning/Desktop/AgentLink/node_modules/firebase-functions/lib/v1/index.js\"}}"}}
+[debug] [2025-09-30T02:29:32.225Z] [runtime-status] [81731] Resolved module firebase-functions {"declared":true,"installed":true,"version":"4.9.0","resolution":"/Users/hogeoning/Desktop/AgentLink/node_modules/firebase-functions/lib/v1/index.js"} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-api"},"extension":{},"message":"[runtime-status] [81731] Resolved module firebase-functions {\"declared\":true,\"installed\":true,\"version\":\"4.9.0\",\"resolution\":\"/Users/hogeoning/Desktop/AgentLink/node_modules/firebase-functions/lib/v1/index.js\"}"}}
+[debug] [2025-09-30T02:29:32.225Z] [runtime-status] [81731] Resolved module firebase-admin {"declared":true,"installed":true,"version":"12.7.0","resolution":"/Users/hogeoning/Desktop/AgentLink/node_modules/firebase-admin/lib/index.js"} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-api"},"extension":{},"message":"[runtime-status] [81731] Resolved module firebase-admin {\"declared\":true,\"installed\":true,\"version\":\"12.7.0\",\"resolution\":\"/Users/hogeoning/Desktop/AgentLink/node_modules/firebase-admin/lib/index.js\"}"}}
+[debug] [2025-09-30T02:29:32.226Z] [runtime-status] [81731] Resolved module firebase-functions {"declared":true,"installed":true,"version":"4.9.0","resolution":"/Users/hogeoning/Desktop/AgentLink/node_modules/firebase-functions/lib/v1/index.js"} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-api"},"extension":{},"message":"[runtime-status] [81731] Resolved module firebase-functions {\"declared\":true,\"installed\":true,\"version\":\"4.9.0\",\"resolution\":\"/Users/hogeoning/Desktop/AgentLink/node_modules/firebase-functions/lib/v1/index.js\"}"}}
+[debug] [2025-09-30T02:29:32.226Z] [runtime-status] [81731] firebase-admin has been stubbed. {"adminResolution":{"declared":true,"installed":true,"version":"12.7.0","resolution":"/Users/hogeoning/Desktop/AgentLink/node_modules/firebase-admin/lib/index.js"}} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-api"},"extension":{},"message":"[runtime-status] [81731] firebase-admin has been stubbed. {\"adminResolution\":{\"declared\":true,\"installed\":true,\"version\":\"12.7.0\",\"resolution\":\"/Users/hogeoning/Desktop/AgentLink/node_modules/firebase-admin/lib/index.js\"}}"}}
+[debug] [2025-09-30T02:29:32.265Z] [runtime-status] [81731] Functions runtime initialized. {"cwd":"/Users/hogeoning/Desktop/AgentLink/functions","node_version":"22.17.0"} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-api"},"extension":{},"message":"[runtime-status] [81731] Functions runtime initialized. {\"cwd\":\"/Users/hogeoning/Desktop/AgentLink/functions\",\"node_version\":\"22.17.0\"}"}}
+[debug] [2025-09-30T02:29:32.265Z] [runtime-status] [81731] Listening to port: /var/folders/l1/blydpfmj59jfbdr3wnmft9000000gn/T/fire_emu_03bd4dadbe583086.sock {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-api"},"extension":{},"message":"[runtime-status] [81731] Listening to port: /var/folders/l1/blydpfmj59jfbdr3wnmft9000000gn/T/fire_emu_03bd4dadbe583086.sock"}}
+[debug] [2025-09-30T02:29:32.336Z] [worker-us-central1-api-0233678f-625e-4d29-9e66-18d5823e1e6c]: IDLE {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-api"},"extension":{},"message":"[worker-us-central1-api-0233678f-625e-4d29-9e66-18d5823e1e6c]: IDLE"}}
+[debug] [2025-09-30T02:29:32.336Z] [worker-pool] submitRequest(triggerId=us-central1-api) {"metadata":{"emulator":{"name":"functions"},"message":"[worker-pool] submitRequest(triggerId=us-central1-api)"}}
+[info] i  functions: Beginning execution of "us-central1-api" {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-api"},"extension":{},"message":"Beginning execution of \"us-central1-api\""}}
+[debug] [2025-09-30T02:29:32.336Z] [worker-us-central1-api-0233678f-625e-4d29-9e66-18d5823e1e6c]: BUSY {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-api"},"extension":{},"message":"[worker-us-central1-api-0233678f-625e-4d29-9e66-18d5823e1e6c]: BUSY"}}
+[debug] [2025-09-30T02:29:32.338Z] Finishing up request with event=pause {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-api"},"extension":{},"message":"Finishing up request with event=pause"}}
+[info] i  functions: Finished "us-central1-api" in 2.000875ms {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-api"},"extension":{},"message":"Finished \"us-central1-api\" in 2.000875ms"}}
+[debug] [2025-09-30T02:29:32.338Z] [worker-us-central1-api-0233678f-625e-4d29-9e66-18d5823e1e6c]: IDLE {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-api"},"extension":{},"message":"[worker-us-central1-api-0233678f-625e-4d29-9e66-18d5823e1e6c]: IDLE"}}
+[debug] [2025-09-30T02:29:32.338Z] Finishing up request with event=finish {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-api"},"extension":{},"message":"Finishing up request with event=finish"}}
+[debug] [2025-09-30T02:29:32.338Z] Finishing up request with event=close {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-api"},"extension":{},"message":"Finishing up request with event=close"}}
+[debug] [2025-09-30T02:29:32.338Z] [work-queue] {"queuedWork":[],"queueLength":0,"runningWork":[],"workRunningCount":0}
+[debug] [2025-09-30T02:29:35.186Z] Functions emulator received unknown request at path /api/health
+[debug] [2025-09-30T02:29:42.601Z] [work-queue] {"queuedWork":["/agentlink-391f7/us-central1/api/health-2025-09-30T02:29:42.601Z"],"queueLength":1,"runningWork":[],"workRunningCount":0}
+[debug] [2025-09-30T02:29:42.601Z] [work-queue] {"queuedWork":[],"queueLength":0,"runningWork":["/agentlink-391f7/us-central1/api/health-2025-09-30T02:29:42.601Z"],"workRunningCount":1}
+[debug] [2025-09-30T02:29:42.601Z] Accepted request GET /agentlink-391f7/us-central1/api/health --> us-central1-api
+[debug] [2025-09-30T02:29:42.606Z] [functions] Runtime ready! Sending request! {"metadata":{"emulator":{"name":"functions"},"message":"[functions] Runtime ready! Sending request!"}}
+[debug] [2025-09-30T02:29:42.606Z] [functions] Got req.url=/agentlink-391f7/us-central1/api/health, mapping to path=/health {"metadata":{"emulator":{"name":"functions"},"message":"[functions] Got req.url=/agentlink-391f7/us-central1/api/health, mapping to path=/health"}}
+[debug] [2025-09-30T02:29:42.606Z] [worker-pool] submitRequest(triggerId=us-central1-api) {"metadata":{"emulator":{"name":"functions"},"message":"[worker-pool] submitRequest(triggerId=us-central1-api)"}}
+[info] i  functions: Beginning execution of "us-central1-api" {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-api"},"extension":{},"message":"Beginning execution of \"us-central1-api\""}}
+[debug] [2025-09-30T02:29:42.607Z] [worker-us-central1-api-0233678f-625e-4d29-9e66-18d5823e1e6c]: BUSY {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-api"},"extension":{},"message":"[worker-us-central1-api-0233678f-625e-4d29-9e66-18d5823e1e6c]: BUSY"}}
+[debug] [2025-09-30T02:29:42.607Z] [work-queue] {"queuedWork":["/agentlink-391f7/us-central1/api/health-2025-09-30T02:29:42.607Z"],"queueLength":1,"runningWork":["/agentlink-391f7/us-central1/api/health-2025-09-30T02:29:42.601Z"],"workRunningCount":1}
+[debug] [2025-09-30T02:29:42.607Z] [work-queue] {"queuedWork":[],"queueLength":0,"runningWork":["/agentlink-391f7/us-central1/api/health-2025-09-30T02:29:42.601Z","/agentlink-391f7/us-central1/api/health-2025-09-30T02:29:42.607Z"],"workRunningCount":2}
+[debug] [2025-09-30T02:29:42.607Z] Accepted request GET /agentlink-391f7/us-central1/api/health --> us-central1-api
+[debug] [2025-09-30T02:29:42.608Z] [functions] Runtime ready! Sending request! {"metadata":{"emulator":{"name":"functions"},"message":"[functions] Runtime ready! Sending request!"}}
+[debug] [2025-09-30T02:29:42.609Z] [functions] Got req.url=/agentlink-391f7/us-central1/api/health, mapping to path=/health {"metadata":{"emulator":{"name":"functions"},"message":"[functions] Got req.url=/agentlink-391f7/us-central1/api/health, mapping to path=/health"}}
+[debug] [2025-09-30T02:29:42.610Z] [worker-pool] addWorker(us-central1-api) {"metadata":{"emulator":{"name":"functions"},"message":"[worker-pool] addWorker(us-central1-api)"}}
+[debug] [2025-09-30T02:29:42.610Z] [worker-pool] Adding worker with key us-central1-api, total=2 {"metadata":{"emulator":{"name":"functions"},"message":"[worker-pool] Adding worker with key us-central1-api, total=2"}}
+[debug] [2025-09-30T02:29:42.611Z] Finishing up request with event=pause {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-api"},"extension":{},"message":"Finishing up request with event=pause"}}
+[info] i  functions: Finished "us-central1-api" in 4.579958ms {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-api"},"extension":{},"message":"Finished \"us-central1-api\" in 4.579958ms"}}
+[debug] [2025-09-30T02:29:42.611Z] [worker-us-central1-api-0233678f-625e-4d29-9e66-18d5823e1e6c]: IDLE {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-api"},"extension":{},"message":"[worker-us-central1-api-0233678f-625e-4d29-9e66-18d5823e1e6c]: IDLE"}}
+[debug] [2025-09-30T02:29:42.611Z] Finishing up request with event=finish {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-api"},"extension":{},"message":"Finishing up request with event=finish"}}
+[debug] [2025-09-30T02:29:42.611Z] Finishing up request with event=close {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-api"},"extension":{},"message":"Finishing up request with event=close"}}
+[debug] [2025-09-30T02:29:42.611Z] [work-queue] {"queuedWork":[],"queueLength":0,"runningWork":["/agentlink-391f7/us-central1/api/health-2025-09-30T02:29:42.607Z"],"workRunningCount":1}
+[debug] [2025-09-30T02:29:42.854Z] [runtime-status] [82030] Resolved module firebase-admin {"declared":true,"installed":true,"version":"12.7.0","resolution":"/Users/hogeoning/Desktop/AgentLink/node_modules/firebase-admin/lib/index.js"} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-api"},"extension":{},"message":"[runtime-status] [82030] Resolved module firebase-admin {\"declared\":true,\"installed\":true,\"version\":\"12.7.0\",\"resolution\":\"/Users/hogeoning/Desktop/AgentLink/node_modules/firebase-admin/lib/index.js\"}"}}
+[debug] [2025-09-30T02:29:42.854Z] [runtime-status] [82030] Resolved module firebase-functions {"declared":true,"installed":true,"version":"4.9.0","resolution":"/Users/hogeoning/Desktop/AgentLink/node_modules/firebase-functions/lib/v1/index.js"} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-api"},"extension":{},"message":"[runtime-status] [82030] Resolved module firebase-functions {\"declared\":true,\"installed\":true,\"version\":\"4.9.0\",\"resolution\":\"/Users/hogeoning/Desktop/AgentLink/node_modules/firebase-functions/lib/v1/index.js\"}"}}
+[debug] [2025-09-30T02:29:42.855Z] [runtime-status] [82030] Outgoing network have been stubbed. [{"name":"http","status":"mocked"},{"name":"http","status":"mocked"},{"name":"https","status":"mocked"},{"name":"https","status":"mocked"},{"name":"net","status":"mocked"}] {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-api"},"extension":{},"message":"[runtime-status] [82030] Outgoing network have been stubbed. [{\"name\":\"http\",\"status\":\"mocked\"},{\"name\":\"http\",\"status\":\"mocked\"},{\"name\":\"https\",\"status\":\"mocked\"},{\"name\":\"https\",\"status\":\"mocked\"},{\"name\":\"net\",\"status\":\"mocked\"}]"}}
+[debug] [2025-09-30T02:29:42.855Z] [runtime-status] [82030] Resolved module firebase-functions {"declared":true,"installed":true,"version":"4.9.0","resolution":"/Users/hogeoning/Desktop/AgentLink/node_modules/firebase-functions/lib/v1/index.js"} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-api"},"extension":{},"message":"[runtime-status] [82030] Resolved module firebase-functions {\"declared\":true,\"installed\":true,\"version\":\"4.9.0\",\"resolution\":\"/Users/hogeoning/Desktop/AgentLink/node_modules/firebase-functions/lib/v1/index.js\"}"}}
+[debug] [2025-09-30T02:29:42.902Z] [runtime-status] [82030] Checked functions.config() {"config":{}} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-api"},"extension":{},"message":"[runtime-status] [82030] Checked functions.config() {\"config\":{}}"}}
+[debug] [2025-09-30T02:29:42.902Z] [runtime-status] [82030] firebase-functions has been stubbed. {"functionsResolution":{"declared":true,"installed":true,"version":"4.9.0","resolution":"/Users/hogeoning/Desktop/AgentLink/node_modules/firebase-functions/lib/v1/index.js"}} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-api"},"extension":{},"message":"[runtime-status] [82030] firebase-functions has been stubbed. {\"functionsResolution\":{\"declared\":true,\"installed\":true,\"version\":\"4.9.0\",\"resolution\":\"/Users/hogeoning/Desktop/AgentLink/node_modules/firebase-functions/lib/v1/index.js\"}}"}}
+[debug] [2025-09-30T02:29:42.902Z] [runtime-status] [82030] Resolved module firebase-functions {"declared":true,"installed":true,"version":"4.9.0","resolution":"/Users/hogeoning/Desktop/AgentLink/node_modules/firebase-functions/lib/v1/index.js"} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-api"},"extension":{},"message":"[runtime-status] [82030] Resolved module firebase-functions {\"declared\":true,\"installed\":true,\"version\":\"4.9.0\",\"resolution\":\"/Users/hogeoning/Desktop/AgentLink/node_modules/firebase-functions/lib/v1/index.js\"}"}}
+[debug] [2025-09-30T02:29:42.902Z] [runtime-status] [82030] Resolved module firebase-admin {"declared":true,"installed":true,"version":"12.7.0","resolution":"/Users/hogeoning/Desktop/AgentLink/node_modules/firebase-admin/lib/index.js"} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-api"},"extension":{},"message":"[runtime-status] [82030] Resolved module firebase-admin {\"declared\":true,\"installed\":true,\"version\":\"12.7.0\",\"resolution\":\"/Users/hogeoning/Desktop/AgentLink/node_modules/firebase-admin/lib/index.js\"}"}}
+[debug] [2025-09-30T02:29:42.903Z] [runtime-status] [82030] Resolved module firebase-functions {"declared":true,"installed":true,"version":"4.9.0","resolution":"/Users/hogeoning/Desktop/AgentLink/node_modules/firebase-functions/lib/v1/index.js"} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-api"},"extension":{},"message":"[runtime-status] [82030] Resolved module firebase-functions {\"declared\":true,\"installed\":true,\"version\":\"4.9.0\",\"resolution\":\"/Users/hogeoning/Desktop/AgentLink/node_modules/firebase-functions/lib/v1/index.js\"}"}}
+[debug] [2025-09-30T02:29:42.903Z] [runtime-status] [82030] firebase-admin has been stubbed. {"adminResolution":{"declared":true,"installed":true,"version":"12.7.0","resolution":"/Users/hogeoning/Desktop/AgentLink/node_modules/firebase-admin/lib/index.js"}} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-api"},"extension":{},"message":"[runtime-status] [82030] firebase-admin has been stubbed. {\"adminResolution\":{\"declared\":true,\"installed\":true,\"version\":\"12.7.0\",\"resolution\":\"/Users/hogeoning/Desktop/AgentLink/node_modules/firebase-admin/lib/index.js\"}}"}}
+[debug] [2025-09-30T02:29:42.943Z] [runtime-status] [82030] Functions runtime initialized. {"cwd":"/Users/hogeoning/Desktop/AgentLink/functions","node_version":"22.17.0"} {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-api"},"extension":{},"message":"[runtime-status] [82030] Functions runtime initialized. {\"cwd\":\"/Users/hogeoning/Desktop/AgentLink/functions\",\"node_version\":\"22.17.0\"}"}}
+[debug] [2025-09-30T02:29:42.943Z] [runtime-status] [82030] Listening to port: /var/folders/l1/blydpfmj59jfbdr3wnmft9000000gn/T/fire_emu_de32f370ea0be63e.sock {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-api"},"extension":{},"message":"[runtime-status] [82030] Listening to port: /var/folders/l1/blydpfmj59jfbdr3wnmft9000000gn/T/fire_emu_de32f370ea0be63e.sock"}}
+[debug] [2025-09-30T02:29:43.017Z] [worker-us-central1-api-c584b93a-8ef7-4b95-8a73-2d8cf8791154]: IDLE {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-api"},"extension":{},"message":"[worker-us-central1-api-c584b93a-8ef7-4b95-8a73-2d8cf8791154]: IDLE"}}
+[debug] [2025-09-30T02:29:43.017Z] [worker-pool] submitRequest(triggerId=us-central1-api) {"metadata":{"emulator":{"name":"functions"},"message":"[worker-pool] submitRequest(triggerId=us-central1-api)"}}
+[info] i  functions: Beginning execution of "us-central1-api" {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-api"},"extension":{},"message":"Beginning execution of \"us-central1-api\""}}
+[debug] [2025-09-30T02:29:43.017Z] [worker-us-central1-api-0233678f-625e-4d29-9e66-18d5823e1e6c]: BUSY {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-api"},"extension":{},"message":"[worker-us-central1-api-0233678f-625e-4d29-9e66-18d5823e1e6c]: BUSY"}}
+[debug] [2025-09-30T02:29:43.019Z] Finishing up request with event=pause {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-api"},"extension":{},"message":"Finishing up request with event=pause"}}
+[info] i  functions: Finished "us-central1-api" in 1.839459ms {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-api"},"extension":{},"message":"Finished \"us-central1-api\" in 1.839459ms"}}
+[debug] [2025-09-30T02:29:43.019Z] [worker-us-central1-api-0233678f-625e-4d29-9e66-18d5823e1e6c]: IDLE {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-api"},"extension":{},"message":"[worker-us-central1-api-0233678f-625e-4d29-9e66-18d5823e1e6c]: IDLE"}}
+[debug] [2025-09-30T02:29:43.019Z] Finishing up request with event=finish {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-api"},"extension":{},"message":"Finishing up request with event=finish"}}
+[debug] [2025-09-30T02:29:43.019Z] Finishing up request with event=close {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-api"},"extension":{},"message":"Finishing up request with event=close"}}
+[debug] [2025-09-30T02:29:43.019Z] [work-queue] {"queuedWork":[],"queueLength":0,"runningWork":[],"workRunningCount":0}
+[debug] [2025-09-30T02:29:54.980Z] [work-queue] {"queuedWork":["/agentlink-391f7/us-central1/api/health-2025-09-30T02:29:54.980Z"],"queueLength":1,"runningWork":[],"workRunningCount":0}
+[debug] [2025-09-30T02:29:54.980Z] [work-queue] {"queuedWork":[],"queueLength":0,"runningWork":["/agentlink-391f7/us-central1/api/health-2025-09-30T02:29:54.980Z"],"workRunningCount":1}
+[debug] [2025-09-30T02:29:54.980Z] Accepted request GET /agentlink-391f7/us-central1/api/health --> us-central1-api
+[debug] [2025-09-30T02:29:54.981Z] [functions] Runtime ready! Sending request! {"metadata":{"emulator":{"name":"functions"},"message":"[functions] Runtime ready! Sending request!"}}
+[debug] [2025-09-30T02:29:54.981Z] [functions] Got req.url=/agentlink-391f7/us-central1/api/health, mapping to path=/health {"metadata":{"emulator":{"name":"functions"},"message":"[functions] Got req.url=/agentlink-391f7/us-central1/api/health, mapping to path=/health"}}
+[debug] [2025-09-30T02:29:54.981Z] [worker-pool] submitRequest(triggerId=us-central1-api) {"metadata":{"emulator":{"name":"functions"},"message":"[worker-pool] submitRequest(triggerId=us-central1-api)"}}
+[info] i  functions: Beginning execution of "us-central1-api" {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-api"},"extension":{},"message":"Beginning execution of \"us-central1-api\""}}
+[debug] [2025-09-30T02:29:54.981Z] [worker-us-central1-api-0233678f-625e-4d29-9e66-18d5823e1e6c]: BUSY {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-api"},"extension":{},"message":"[worker-us-central1-api-0233678f-625e-4d29-9e66-18d5823e1e6c]: BUSY"}}
+[debug] [2025-09-30T02:29:54.982Z] [work-queue] {"queuedWork":["/agentlink-391f7/us-central1/api/health-2025-09-30T02:29:54.982Z"],"queueLength":1,"runningWork":["/agentlink-391f7/us-central1/api/health-2025-09-30T02:29:54.980Z"],"workRunningCount":1}
+[debug] [2025-09-30T02:29:54.982Z] [work-queue] {"queuedWork":[],"queueLength":0,"runningWork":["/agentlink-391f7/us-central1/api/health-2025-09-30T02:29:54.980Z","/agentlink-391f7/us-central1/api/health-2025-09-30T02:29:54.982Z"],"workRunningCount":2}
+[debug] [2025-09-30T02:29:54.982Z] Accepted request GET /agentlink-391f7/us-central1/api/health --> us-central1-api
+[debug] [2025-09-30T02:29:54.982Z] [functions] Runtime ready! Sending request! {"metadata":{"emulator":{"name":"functions"},"message":"[functions] Runtime ready! Sending request!"}}
+[debug] [2025-09-30T02:29:54.982Z] [functions] Got req.url=/agentlink-391f7/us-central1/api/health, mapping to path=/health {"metadata":{"emulator":{"name":"functions"},"message":"[functions] Got req.url=/agentlink-391f7/us-central1/api/health, mapping to path=/health"}}
+[debug] [2025-09-30T02:29:54.982Z] [worker-pool] submitRequest(triggerId=us-central1-api) {"metadata":{"emulator":{"name":"functions"},"message":"[worker-pool] submitRequest(triggerId=us-central1-api)"}}
+[info] i  functions: Beginning execution of "us-central1-api" {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-api"},"extension":{},"message":"Beginning execution of \"us-central1-api\""}}
+[debug] [2025-09-30T02:29:54.982Z] [worker-us-central1-api-c584b93a-8ef7-4b95-8a73-2d8cf8791154]: BUSY {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-api"},"extension":{},"message":"[worker-us-central1-api-c584b93a-8ef7-4b95-8a73-2d8cf8791154]: BUSY"}}
+[debug] [2025-09-30T02:29:54.983Z] Finishing up request with event=pause {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-api"},"extension":{},"message":"Finishing up request with event=pause"}}
+[info] i  functions: Finished "us-central1-api" in 2.160833ms {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-api"},"extension":{},"message":"Finished \"us-central1-api\" in 2.160833ms"}}
+[debug] [2025-09-30T02:29:54.983Z] [worker-us-central1-api-0233678f-625e-4d29-9e66-18d5823e1e6c]: IDLE {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-api"},"extension":{},"message":"[worker-us-central1-api-0233678f-625e-4d29-9e66-18d5823e1e6c]: IDLE"}}
+[debug] [2025-09-30T02:29:54.983Z] Finishing up request with event=finish {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-api"},"extension":{},"message":"Finishing up request with event=finish"}}
+[debug] [2025-09-30T02:29:54.983Z] Finishing up request with event=close {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-api"},"extension":{},"message":"Finishing up request with event=close"}}
+[debug] [2025-09-30T02:29:54.983Z] [work-queue] {"queuedWork":[],"queueLength":0,"runningWork":["/agentlink-391f7/us-central1/api/health-2025-09-30T02:29:54.982Z"],"workRunningCount":1}
+[debug] [2025-09-30T02:29:54.985Z] Finishing up request with event=pause {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-api"},"extension":{},"message":"Finishing up request with event=pause"}}
+[info] i  functions: Finished "us-central1-api" in 2.263625ms {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-api"},"extension":{},"message":"Finished \"us-central1-api\" in 2.263625ms"}}
+[debug] [2025-09-30T02:29:54.985Z] [worker-us-central1-api-c584b93a-8ef7-4b95-8a73-2d8cf8791154]: IDLE {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-api"},"extension":{},"message":"[worker-us-central1-api-c584b93a-8ef7-4b95-8a73-2d8cf8791154]: IDLE"}}
+[debug] [2025-09-30T02:29:54.985Z] Finishing up request with event=finish {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-api"},"extension":{},"message":"Finishing up request with event=finish"}}
+[debug] [2025-09-30T02:29:54.985Z] Finishing up request with event=close {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-api"},"extension":{},"message":"Finishing up request with event=close"}}
+[debug] [2025-09-30T02:29:54.985Z] [work-queue] {"queuedWork":[],"queueLength":0,"runningWork":[],"workRunningCount":0}
+[debug] [2025-09-30T02:30:05.013Z] [work-queue] {"queuedWork":["/agentlink-391f7/us-central1/api/health-2025-09-30T02:30:05.013Z"],"queueLength":1,"runningWork":[],"workRunningCount":0}
+[debug] [2025-09-30T02:30:05.013Z] [work-queue] {"queuedWork":[],"queueLength":0,"runningWork":["/agentlink-391f7/us-central1/api/health-2025-09-30T02:30:05.013Z"],"workRunningCount":1}
+[debug] [2025-09-30T02:30:05.013Z] Accepted request GET /agentlink-391f7/us-central1/api/health --> us-central1-api
+[debug] [2025-09-30T02:30:05.015Z] [functions] Runtime ready! Sending request! {"metadata":{"emulator":{"name":"functions"},"message":"[functions] Runtime ready! Sending request!"}}
+[debug] [2025-09-30T02:30:05.015Z] [functions] Got req.url=/agentlink-391f7/us-central1/api/health, mapping to path=/health {"metadata":{"emulator":{"name":"functions"},"message":"[functions] Got req.url=/agentlink-391f7/us-central1/api/health, mapping to path=/health"}}
+[debug] [2025-09-30T02:30:05.015Z] [worker-pool] submitRequest(triggerId=us-central1-api) {"metadata":{"emulator":{"name":"functions"},"message":"[worker-pool] submitRequest(triggerId=us-central1-api)"}}
+[info] i  functions: Beginning execution of "us-central1-api" {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-api"},"extension":{},"message":"Beginning execution of \"us-central1-api\""}}
+[debug] [2025-09-30T02:30:05.015Z] [worker-us-central1-api-0233678f-625e-4d29-9e66-18d5823e1e6c]: BUSY {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-api"},"extension":{},"message":"[worker-us-central1-api-0233678f-625e-4d29-9e66-18d5823e1e6c]: BUSY"}}
+[debug] [2025-09-30T02:30:05.017Z] Finishing up request with event=pause {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-api"},"extension":{},"message":"Finishing up request with event=pause"}}
+[info] i  functions: Finished "us-central1-api" in 1.995333ms {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-api"},"extension":{},"message":"Finished \"us-central1-api\" in 1.995333ms"}}
+[debug] [2025-09-30T02:30:05.017Z] [worker-us-central1-api-0233678f-625e-4d29-9e66-18d5823e1e6c]: IDLE {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-api"},"extension":{},"message":"[worker-us-central1-api-0233678f-625e-4d29-9e66-18d5823e1e6c]: IDLE"}}
+[debug] [2025-09-30T02:30:05.017Z] Finishing up request with event=finish {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-api"},"extension":{},"message":"Finishing up request with event=finish"}}
+[debug] [2025-09-30T02:30:05.017Z] Finishing up request with event=close {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-api"},"extension":{},"message":"Finishing up request with event=close"}}
+[debug] [2025-09-30T02:30:05.017Z] [work-queue] {"queuedWork":[],"queueLength":0,"runningWork":[],"workRunningCount":0}
+[debug] [2025-09-30T02:30:11.058Z] [work-queue] {"queuedWork":["/agentlink-391f7/us-central1/api/health-2025-09-30T02:30:11.058Z"],"queueLength":1,"runningWork":[],"workRunningCount":0}
+[debug] [2025-09-30T02:30:11.058Z] [work-queue] {"queuedWork":[],"queueLength":0,"runningWork":["/agentlink-391f7/us-central1/api/health-2025-09-30T02:30:11.058Z"],"workRunningCount":1}
+[debug] [2025-09-30T02:30:11.058Z] Accepted request GET /agentlink-391f7/us-central1/api/health --> us-central1-api
+[debug] [2025-09-30T02:30:11.059Z] [functions] Runtime ready! Sending request! {"metadata":{"emulator":{"name":"functions"},"message":"[functions] Runtime ready! Sending request!"}}
+[debug] [2025-09-30T02:30:11.059Z] [functions] Got req.url=/agentlink-391f7/us-central1/api/health, mapping to path=/health {"metadata":{"emulator":{"name":"functions"},"message":"[functions] Got req.url=/agentlink-391f7/us-central1/api/health, mapping to path=/health"}}
+[debug] [2025-09-30T02:30:11.059Z] [worker-pool] submitRequest(triggerId=us-central1-api) {"metadata":{"emulator":{"name":"functions"},"message":"[worker-pool] submitRequest(triggerId=us-central1-api)"}}
+[info] i  functions: Beginning execution of "us-central1-api" {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-api"},"extension":{},"message":"Beginning execution of \"us-central1-api\""}}
+[debug] [2025-09-30T02:30:11.059Z] [worker-us-central1-api-0233678f-625e-4d29-9e66-18d5823e1e6c]: BUSY {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-api"},"extension":{},"message":"[worker-us-central1-api-0233678f-625e-4d29-9e66-18d5823e1e6c]: BUSY"}}
+[debug] [2025-09-30T02:30:11.060Z] Finishing up request with event=pause {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-api"},"extension":{},"message":"Finishing up request with event=pause"}}
+[info] i  functions: Finished "us-central1-api" in 1.186917ms {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-api"},"extension":{},"message":"Finished \"us-central1-api\" in 1.186917ms"}}
+[debug] [2025-09-30T02:30:11.060Z] [worker-us-central1-api-0233678f-625e-4d29-9e66-18d5823e1e6c]: IDLE {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-api"},"extension":{},"message":"[worker-us-central1-api-0233678f-625e-4d29-9e66-18d5823e1e6c]: IDLE"}}
+[debug] [2025-09-30T02:30:11.060Z] Finishing up request with event=finish {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-api"},"extension":{},"message":"Finishing up request with event=finish"}}
+[debug] [2025-09-30T02:30:11.060Z] Finishing up request with event=close {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-api"},"extension":{},"message":"Finishing up request with event=close"}}
+[debug] [2025-09-30T02:30:11.060Z] [work-queue] {"queuedWork":[],"queueLength":0,"runningWork":[],"workRunningCount":0}
+[debug] [2025-09-30T02:30:18.946Z] [work-queue] {"queuedWork":["/agentlink-391f7/us-central1/api/health-2025-09-30T02:30:18.946Z"],"queueLength":1,"runningWork":[],"workRunningCount":0}
+[debug] [2025-09-30T02:30:18.946Z] [work-queue] {"queuedWork":[],"queueLength":0,"runningWork":["/agentlink-391f7/us-central1/api/health-2025-09-30T02:30:18.946Z"],"workRunningCount":1}
+[debug] [2025-09-30T02:30:18.946Z] Accepted request GET /agentlink-391f7/us-central1/api/health --> us-central1-api
+[debug] [2025-09-30T02:30:18.948Z] [functions] Runtime ready! Sending request! {"metadata":{"emulator":{"name":"functions"},"message":"[functions] Runtime ready! Sending request!"}}
+[debug] [2025-09-30T02:30:18.948Z] [functions] Got req.url=/agentlink-391f7/us-central1/api/health, mapping to path=/health {"metadata":{"emulator":{"name":"functions"},"message":"[functions] Got req.url=/agentlink-391f7/us-central1/api/health, mapping to path=/health"}}
+[debug] [2025-09-30T02:30:18.948Z] [worker-pool] submitRequest(triggerId=us-central1-api) {"metadata":{"emulator":{"name":"functions"},"message":"[worker-pool] submitRequest(triggerId=us-central1-api)"}}
+[info] i  functions: Beginning execution of "us-central1-api" {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-api"},"extension":{},"message":"Beginning execution of \"us-central1-api\""}}
+[debug] [2025-09-30T02:30:18.949Z] [worker-us-central1-api-0233678f-625e-4d29-9e66-18d5823e1e6c]: BUSY {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-api"},"extension":{},"message":"[worker-us-central1-api-0233678f-625e-4d29-9e66-18d5823e1e6c]: BUSY"}}
+[debug] [2025-09-30T02:30:18.949Z] [work-queue] {"queuedWork":["/agentlink-391f7/us-central1/api/health-2025-09-30T02:30:18.949Z"],"queueLength":1,"runningWork":["/agentlink-391f7/us-central1/api/health-2025-09-30T02:30:18.946Z"],"workRunningCount":1}
+[debug] [2025-09-30T02:30:18.949Z] [work-queue] {"queuedWork":[],"queueLength":0,"runningWork":["/agentlink-391f7/us-central1/api/health-2025-09-30T02:30:18.946Z","/agentlink-391f7/us-central1/api/health-2025-09-30T02:30:18.949Z"],"workRunningCount":2}
+[debug] [2025-09-30T02:30:18.949Z] Accepted request GET /agentlink-391f7/us-central1/api/health --> us-central1-api
+[debug] [2025-09-30T02:30:18.950Z] [functions] Runtime ready! Sending request! {"metadata":{"emulator":{"name":"functions"},"message":"[functions] Runtime ready! Sending request!"}}
+[debug] [2025-09-30T02:30:18.951Z] [functions] Got req.url=/agentlink-391f7/us-central1/api/health, mapping to path=/health {"metadata":{"emulator":{"name":"functions"},"message":"[functions] Got req.url=/agentlink-391f7/us-central1/api/health, mapping to path=/health"}}
+[debug] [2025-09-30T02:30:18.951Z] [worker-pool] submitRequest(triggerId=us-central1-api) {"metadata":{"emulator":{"name":"functions"},"message":"[worker-pool] submitRequest(triggerId=us-central1-api)"}}
+[info] i  functions: Beginning execution of "us-central1-api" {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-api"},"extension":{},"message":"Beginning execution of \"us-central1-api\""}}
+[debug] [2025-09-30T02:30:18.951Z] [worker-us-central1-api-c584b93a-8ef7-4b95-8a73-2d8cf8791154]: BUSY {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-api"},"extension":{},"message":"[worker-us-central1-api-c584b93a-8ef7-4b95-8a73-2d8cf8791154]: BUSY"}}
+[debug] [2025-09-30T02:30:18.952Z] Finishing up request with event=pause {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-api"},"extension":{},"message":"Finishing up request with event=pause"}}
+[info] i  functions: Finished "us-central1-api" in 3.121375ms {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-api"},"extension":{},"message":"Finished \"us-central1-api\" in 3.121375ms"}}
+[debug] [2025-09-30T02:30:18.952Z] [worker-us-central1-api-0233678f-625e-4d29-9e66-18d5823e1e6c]: IDLE {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-api"},"extension":{},"message":"[worker-us-central1-api-0233678f-625e-4d29-9e66-18d5823e1e6c]: IDLE"}}
+[debug] [2025-09-30T02:30:18.952Z] Finishing up request with event=finish {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-api"},"extension":{},"message":"Finishing up request with event=finish"}}
+[debug] [2025-09-30T02:30:18.952Z] Finishing up request with event=close {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-api"},"extension":{},"message":"Finishing up request with event=close"}}
+[debug] [2025-09-30T02:30:18.952Z] [work-queue] {"queuedWork":[],"queueLength":0,"runningWork":["/agentlink-391f7/us-central1/api/health-2025-09-30T02:30:18.949Z"],"workRunningCount":1}
+[debug] [2025-09-30T02:30:18.953Z] Finishing up request with event=pause {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-api"},"extension":{},"message":"Finishing up request with event=pause"}}
+[info] i  functions: Finished "us-central1-api" in 2.045458ms {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-api"},"extension":{},"message":"Finished \"us-central1-api\" in 2.045458ms"}}
+[debug] [2025-09-30T02:30:18.953Z] [worker-us-central1-api-c584b93a-8ef7-4b95-8a73-2d8cf8791154]: IDLE {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-api"},"extension":{},"message":"[worker-us-central1-api-c584b93a-8ef7-4b95-8a73-2d8cf8791154]: IDLE"}}
+[debug] [2025-09-30T02:30:18.953Z] Finishing up request with event=finish {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-api"},"extension":{},"message":"Finishing up request with event=finish"}}
+[debug] [2025-09-30T02:30:18.953Z] Finishing up request with event=close {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-api"},"extension":{},"message":"Finishing up request with event=close"}}
+[debug] [2025-09-30T02:30:18.953Z] [work-queue] {"queuedWork":[],"queueLength":0,"runningWork":[],"workRunningCount":0}

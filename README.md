@@ -37,7 +37,7 @@ AgentLink는 사람이 앱을 뒤적이지 않아도, AI가 가게와 직접 거
     - Functions 에뮬레이터(기본 5001)에 자동 프록시: `/api`, `/ai`, `/dashboard`
       - `.firebaserc`의 기본 프로젝트 ID(`agentlink-391f7`)를 사용하며, 다른 프로젝트를 쓰려면 `FIREBASE_EMULATOR_PROJECT_ID`를 지정하세요.
   - Firebase Emulator Suite (`firebase emulators:start`)
-    - Hosting: http://localhost:5000
+    - Hosting: http://localhost:5002
     - Functions (Express API 포함): http://localhost:5001
     - Firestore: http://localhost:8080
     - Storage: http://localhost:9199
@@ -219,12 +219,15 @@ POST /api/order
 → {
   "order_id": "order_123",
   "status": "pending",
-  "total_price": 20000
+  "payment_status": "paid"
 }
 
 주문 상태
 GET /api/order/:id/status
-→ { "status": "preparing", "eta_minutes": 20 }
+→ {
+  "order_id": "order_123",
+  "status": "preparing"
+}
 
 예외 코드 표준화
 { "code": "E01", "message": "품절", "alternatives": ["menu_002","menu_003"] }
@@ -234,7 +237,47 @@ GET /api/order/:id/status
 오케스트레이터 (단일 호출)
 POST /api/orchestrate
 { "region": "서울", "keyword": "후라이드" }
-→ { "summary": "호건치킨 후라이드 주문 완료, ETA 25분" }
+→ {
+  "store": "호건치킨",
+  "menu": "서울_호건치킨_후라이드치킨_18000_3000_KRW_4.5_open__hogun",
+  "price_total": 19000,
+  "eta_minutes": 25,
+  "summary": [
+    "호건치킨에서 후라이드치킨을 주문했습니다.",
+    "선택 옵션과 배달비를 포함한 총액은 19,000원입니다.",
+    "도착 예상 시간은 약 25분입니다."
+  ]
+}
+
+AI 인덱스
+GET /ai/index.json
+→ {
+  "version": 1,
+  "updated_at": "2024-03-01T09:00:00Z",
+  "stores": [
+    { "store_id": "store_001", "region": "seoul_gangnam", "name": "호건치킨" }
+  ]
+}
+
+GET /ai/store/:id.json
+→ {
+  "version": 1,
+  "updated_at": "2024-03-01T09:00:00Z",
+  "store": { "store_id": "store_001", "name": "호건치킨", "region": "seoul_gangnam" },
+  "menus": [
+    {
+      "menu_id": "menu_001",
+      "title": "서울_호건치킨_후라이드치킨_18000_3000_KRW_4.5_open__hogun",
+      "content": {
+        "description": "바삭바삭",
+        "price": 18000,
+        "currency": "KRW"
+      }
+    }
+  ]
+}
+
+두 엔드포인트 모두 CDN 캐시 헤더(`s-maxage=60, must-revalidate`)가 설정되어 검색봇 및 LLM 크롤러가 최신 데이터를 받아갈 수 있습니다.
 
 🗺️ 6주 실행 플랜
 

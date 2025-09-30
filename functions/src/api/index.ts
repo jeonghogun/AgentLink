@@ -187,7 +187,7 @@ function asyncHandler(fn: AsyncRouteHandler) {
   };
 }
 
-function errorHandler(error: unknown, _req: Request, res: Response, _next: NextFunction): void {
+function errorHandler(error: unknown, _req: Request, res: Response): void {
   const normalized = normalizeError(error);
   const payload: Record<string, unknown> = {
     code: normalized.code,

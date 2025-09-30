@@ -1399,3 +1399,87 @@ INFO: Detected HTTP/2 connection.
 [debug] [2025-09-30T05:12:54.499Z] [worker-us-central1-api-4573c243-4929-4e0c-8646-4b5d53f329b5]: FINISHED {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-api"},"extension":{},"message":"[worker-us-central1-api-4573c243-4929-4e0c-8646-4b5d53f329b5]: FINISHED"}}
 [debug] [2025-09-30T05:12:54.499Z] [worker-us-central1-aiIndex-62f78aca-1ced-4e29-9a45-22cb409604a7]: exited {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-aiIndex"},"extension":{},"message":"[worker-us-central1-aiIndex-62f78aca-1ced-4e29-9a45-22cb409604a7]: exited"}}
 [debug] [2025-09-30T05:12:54.499Z] [worker-us-central1-aiIndex-62f78aca-1ced-4e29-9a45-22cb409604a7]: FINISHED {"metadata":{"emulator":{"name":"functions"},"function":{"name":"us-central1-aiIndex"},"extension":{},"message":"[worker-us-central1-aiIndex-62f78aca-1ced-4e29-9a45-22cb409604a7]: FINISHED"}}
+[debug] [2025-09-30T05:12:56.638Z] File /Users/hogeoning/Desktop/AgentLink/functions/src/api/index.ts changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File /Users/hogeoning/Desktop/AgentLink/functions/src/api/index.ts changed, reloading triggers"}}
+[debug] [2025-09-30T05:12:57.640Z] Validating nodejs source
+[warn] ⚠  functions: package.json indicates an outdated version of firebase-functions. Please upgrade using npm install --save firebase-functions@latest in your functions directory. 
+[warn] ⚠  functions: Please note that there will be breaking changes when you upgrade. 
+[debug] [2025-09-30T05:12:57.874Z] > [functions] package.json contents: {
+  "name": "functions",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "engines": {
+    "node": "^20"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "build:watch": "tsc -p tsconfig.json --watch --preserveWatchOutput",
+    "lint": "eslint \"src/**/*.{ts,tsx}\"",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "tsx --test src/lib/title.test.ts src/lib/orders.test.ts"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "firebase-admin": "^12.0.0",
+    "firebase-functions": "^4.5.0"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.17",
+    "@types/express": "^4.17.21"
+  }
+}
+[debug] [2025-09-30T05:12:57.874Z] Building nodejs source
+[debug] [2025-09-30T05:12:57.874Z] Failed to find version of module node: reached end of search path /Users/hogeoning/Desktop/AgentLink/functions/node_modules
+[warn] ⚠  functions: Your requested "node" version "20" doesn't match your global version "22". Using node@22 from host. 
+[info] i  functions: You are using a version of firebase-functions SDK (4.9.0) that does not have support for the newest Firebase Extensions features. Please update firebase-functions SDK to >=5.1.0 to use them correctly 
+[debug] [2025-09-30T05:12:57.875Z] Could not find functions.yaml. Must use http discovery
+[debug] [2025-09-30T05:12:57.875Z] Found firebase-functions binary at '/Users/hogeoning/Desktop/AgentLink/node_modules/.bin/firebase-functions'
+[info] Serving at port 8505
+
+[debug] [2025-09-30T05:12:58.028Z] Got response from /__/functions.yaml {"endpoints":{"aiIndex":{"availableMemoryMb":256,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","region":["us-central1"],"labels":{},"httpsTrigger":{},"entryPoint":"aiIndex"},"api":{"availableMemoryMb":256,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","region":["us-central1"],"labels":{},"httpsTrigger":{},"entryPoint":"api"},"dashboardApp":{"availableMemoryMb":256,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","region":["us-central1"],"labels":{},"httpsTrigger":{},"entryPoint":"dashboardApp"},"menuCreated":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"eventTrigger":{"eventType":"google.cloud.firestore.document.v1.created","eventFilters":{"database":"(default)","namespace":"(default)"},"eventFilterPathPatterns":{"document":"menus/{menuId}"},"retry":false},"entryPoint":"menuCreated"},"menuUpdated":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"eventTrigger":{"eventType":"google.cloud.firestore.document.v1.updated","eventFilters":{"database":"(default)","namespace":"(default)"},"eventFilterPathPatterns":{"document":"menus/{menuId}"},"retry":false},"entryPoint":"menuUpdated"}},"specVersion":"v1alpha1","requiredAPIs":[]}
+[debug] [2025-09-30T05:12:59.905Z] File /Users/hogeoning/Desktop/AgentLink/functions/src/api/index.ts changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File /Users/hogeoning/Desktop/AgentLink/functions/src/api/index.ts changed, reloading triggers"}}
+[debug] [2025-09-30T05:13:00.906Z] Validating nodejs source
+[warn] ⚠  functions: package.json indicates an outdated version of firebase-functions. Please upgrade using npm install --save firebase-functions@latest in your functions directory. 
+[warn] ⚠  functions: Please note that there will be breaking changes when you upgrade. 
+[debug] [2025-09-30T05:13:01.149Z] > [functions] package.json contents: {
+  "name": "functions",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "engines": {
+    "node": "^20"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "build:watch": "tsc -p tsconfig.json --watch --preserveWatchOutput",
+    "lint": "eslint \"src/**/*.{ts,tsx}\"",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "tsx --test src/lib/title.test.ts src/lib/orders.test.ts"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "firebase-admin": "^12.0.0",
+    "firebase-functions": "^4.5.0"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.17",
+    "@types/express": "^4.17.21"
+  }
+}
+[debug] [2025-09-30T05:13:01.149Z] Building nodejs source
+[debug] [2025-09-30T05:13:01.149Z] Failed to find version of module node: reached end of search path /Users/hogeoning/Desktop/AgentLink/functions/node_modules
+[warn] ⚠  functions: Your requested "node" version "20" doesn't match your global version "22". Using node@22 from host. 
+[info] i  functions: You are using a version of firebase-functions SDK (4.9.0) that does not have support for the newest Firebase Extensions features. Please update firebase-functions SDK to >=5.1.0 to use them correctly 
+[debug] [2025-09-30T05:13:01.149Z] Could not find functions.yaml. Must use http discovery
+[debug] [2025-09-30T05:13:01.149Z] Found firebase-functions binary at '/Users/hogeoning/Desktop/AgentLink/node_modules/.bin/firebase-functions'
+[info] Serving at port 8549
+
+[debug] [2025-09-30T05:13:01.307Z] Got response from /__/functions.yaml {"endpoints":{"aiIndex":{"availableMemoryMb":256,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","region":["us-central1"],"labels":{},"httpsTrigger":{},"entryPoint":"aiIndex"},"api":{"availableMemoryMb":256,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","region":["us-central1"],"labels":{},"httpsTrigger":{},"entryPoint":"api"},"dashboardApp":{"availableMemoryMb":256,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","region":["us-central1"],"labels":{},"httpsTrigger":{},"entryPoint":"dashboardApp"},"menuCreated":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"eventTrigger":{"eventType":"google.cloud.firestore.document.v1.created","eventFilters":{"database":"(default)","namespace":"(default)"},"eventFilterPathPatterns":{"document":"menus/{menuId}"},"retry":false},"entryPoint":"menuCreated"},"menuUpdated":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"eventTrigger":{"eventType":"google.cloud.firestore.document.v1.updated","eventFilters":{"database":"(default)","namespace":"(default)"},"eventFilterPathPatterns":{"document":"menus/{menuId}"},"retry":false},"entryPoint":"menuUpdated"}},"specVersion":"v1alpha1","requiredAPIs":[]}
+[info] ✔  functions: Loaded functions definitions from source: aiIndex, api, dashboardApp, menuCreated, menuUpdated. {"metadata":{"emulator":{"name":"functions"},"message":"Loaded functions definitions from source: aiIndex, api, dashboardApp, menuCreated, menuUpdated."}}
+[info] ✔  functions: Loaded functions definitions from source: aiIndex, api, dashboardApp, menuCreated, menuUpdated. {"metadata":{"emulator":{"name":"functions"},"message":"Loaded functions definitions from source: aiIndex, api, dashboardApp, menuCreated, menuUpdated."}}

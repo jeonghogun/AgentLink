@@ -1,2 +1,3 @@
 lib/
+!src/lib/
 node_modules/

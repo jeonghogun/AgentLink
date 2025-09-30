@@ -34,6 +34,8 @@ AgentLink는 사람이 앱을 뒤적이지 않아도, AI가 가게와 직접 거
   npm run dev
   ```
   - `web-dashboard` 워크스페이스: Vite 개발 서버 (`http://localhost:5173`)
+    - Functions 에뮬레이터(기본 5001)에 자동 프록시: `/api`, `/ai`, `/dashboard`
+      - `.firebaserc`의 기본 프로젝트 ID(`agentlink-391f7`)를 사용하며, 다른 프로젝트를 쓰려면 `FIREBASE_EMULATOR_PROJECT_ID`를 지정하세요.
   - Firebase Emulator Suite (`firebase emulators:start`)
     - Hosting: http://localhost:5000
     - Functions (Express API 포함): http://localhost:5001
@@ -43,6 +45,17 @@ AgentLink는 사람이 앱을 뒤적이지 않아도, AI가 가게와 직접 거
     - Emulator UI: http://localhost:4000 (자동 활성화)
 
 ### 기타 스크립트
+- `npm run lint` / `npm run typecheck` / `npm run build`: 워크스페이스별 ESLint, 타입검사, 빌드 실행
+- `npm run test`: Functions 워크스페이스의 단위 테스트(Node 20 `node:test` 기반)
+- `npm run seed`: Firestore/Storage 에뮬레이터 시드 데이터 12건 메뉴 + 기본 문서 투입
+- `npm run test:rules`: `firebase emulators:exec` 기반 Firestore/Storage 보안 규칙 테스트
+
+## ⚙️ Functions 자동화
+
+- `functions/src/lib/title.ts`: 메뉴·스토어 데이터를 받아 `__hogun` 마커가 붙은 표준화된 타이틀 생성
+- `functions/src/triggers/menus.ts`: Firestore `menus` 문서 생성/업데이트 시 타이틀 재계산 및 `title_v` 증가
+  - 누락 필드가 있어도 기본값을 채워 일관된 텍스트를 생성하며, Functions를 통한 쓰기 시 항상 `__hogun`으로 끝납니다.
+  - `scripts/seed.ts` 시드 실행 시 12개 메뉴 모두 `__hogun` 마커가 포함된 타이틀로 삽입됩니다.
 
 ## 🏗️ 아키텍처 개요
 

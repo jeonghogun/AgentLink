@@ -576,8 +576,16 @@ function shouldFallbackToMock(error: unknown): boolean {
     return true;
   }
 
-  const status = typeof error.status === 'number' ? error.status : 500;
-  return status >= 500;
+  if (!error.code.startsWith('orchestrate/')) {
+    const status = typeof error.status === 'number' ? error.status : 500;
+    return status >= 500;
+  }
+
+  if (error.code === 'orchestrate/invalid-payload') {
+    return false;
+  }
+
+  return true;
 }
 
 function logOrchestrateFallback(requestId: string | undefined, error: unknown): void {

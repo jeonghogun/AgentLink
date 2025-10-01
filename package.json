@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
+  "imports": {
+    "supertest": "./tests/support/supertest.ts"
+  },
   "engines": {
     "node": "^20.0.0"
   },
@@ -19,13 +22,15 @@
     "build": "npm run --workspaces --if-present build",
     "test": "npm run --workspaces --if-present test",
     "test:rules": "firebase emulators:exec --only firestore,storage \"npx tsx scripts/test-rules.ts\"",
-    "seed": "tsx scripts/seed.ts"
+    "seed": "tsx scripts/seed.ts",
+    "e2e": "cross-env API_BYPASS_AUTH=true firebase emulators:exec \"tsx scripts/run-e2e.ts\""
   },
   "devDependencies": {
     "@firebase/rules-unit-testing": "^3.0.0",
     "@types/node": "^20.11.19",
     "@typescript-eslint/eslint-plugin": "^7.0.0",
     "@typescript-eslint/parser": "^7.0.0",
+    "cross-env": "^7.0.3",
     "concurrently": "^8.2.2",
     "eslint": "^8.56.0",
     "eslint-config-prettier": "^9.1.0",

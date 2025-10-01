@@ -219,6 +219,14 @@ async function authenticateMiddleware(req: AuthedRequest, _res: Response, next: 
       });
     }
 
+    const bypassEnabled = process.env.API_BYPASS_AUTH === 'true';
+    const bypassToken = process.env.API_BYPASS_AUTH_TOKEN ?? 'test-token';
+    if (bypassEnabled && token === bypassToken) {
+      req.ownerUid = process.env.API_BYPASS_AUTH_UID ?? 'test-owner';
+      next();
+      return;
+    }
+
     const decoded = await getAuth().verifyIdToken(token);
     req.ownerUid = decoded.uid;
     next();

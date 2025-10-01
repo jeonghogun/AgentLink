@@ -14,8 +14,4 @@ export const api = onRequest(apiApp);
 
 export const aiIndex = onRequest(aiHandler);
 
-export const dashboardApp = onRequest((_req, res) => {
-  res.status(200).send('Dashboard application placeholder. Implement SSR or proxy logic here.');
-});
-
 export * from './triggers/menus.js';

@@ -47,10 +47,11 @@ AgentLink는 사람이 앱을 뒤적이지 않아도, AI가 가게와 직접 거
 ### 기타 스크립트
 - `npm run lint` / `npm run typecheck` / `npm run build`: 워크스페이스별 ESLint, 타입검사, 빌드 실행
 - `npm run test`: Functions 워크스페이스의 단위 테스트(Node 20 `node:test` 기반)
-- `npm run seed`: Firestore/Storage 에뮬레이터 시드 데이터 12건 메뉴 + 기본 문서 투입
+- `npm run seed`: Firestore/Storage 에뮬레이터에 QA 시나리오용 샘플 데이터(60+ 메뉴, 주문/메트릭 문서 등) 투입
 - `npm run test:rules`: `firebase emulators:exec` 기반 Firestore/Storage 보안 규칙 테스트
 - `npm run -w web-dashboard test`: Vitest + React Testing Library 기반 대시보드 단위 테스트
 - `npm run -w web-dashboard test:e2e`: Playwright 기반 대시보드 E2E (사전 `npm run dev` 실행 및 `VITE_BYPASS_AUTH=true` 환경 필요)
+- `npm run e2e`: Firestore 시드 → API/보안 검증(supertest) → Playwright 대시보드 플로우를 한 번에 실행하는 QA 통합 체크리스트
 
 ### Dashboard 환경 구성
 
@@ -63,7 +64,7 @@ AgentLink는 사람이 앱을 뒤적이지 않아도, AI가 가게와 직접 거
 - `functions/src/lib/title.ts`: 메뉴·스토어 데이터를 받아 `__hogun` 마커가 붙은 표준화된 타이틀 생성
 - `functions/src/triggers/menus.ts`: Firestore `menus` 문서 생성/업데이트 시 타이틀 재계산 및 `title_v` 증가
   - 누락 필드가 있어도 기본값을 채워 일관된 텍스트를 생성하며, Functions를 통한 쓰기 시 항상 `__hogun`으로 끝납니다.
-  - `scripts/seed.ts` 시드 실행 시 12개 메뉴 모두 `__hogun` 마커가 포함된 타이틀로 삽입됩니다.
+  - `scripts/seed.ts` 실행 시 60개 이상의 메뉴와 관련 문서가 자동 삽입되고, 모든 메뉴 타이틀이 `__hogun` 마커를 포함합니다.
 - `/api/orchestrate`: 네트워크/런타임 오류가 발생하면 자동으로 모의 응답으로 폴백하여 데모 진행이 끊기지 않으며, 폴백 여부는 서버 로그에만 남습니다.
 - `/api/mock/orchestrate`: 데모 백업용 고정 요약 응답을 반환해 오케스트레이션 흐름을 빠르게 재연할 수 있습니다.
 

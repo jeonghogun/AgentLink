@@ -61,6 +61,10 @@ export function errorMiddleware(error: unknown, req: Request, res: Response, _ne
 
   if (normalized.details) {
     payload.details = normalized.details;
+    const maybeAlternatives = (normalized.details as Record<string, unknown>).alternatives;
+    if (maybeAlternatives !== undefined && !('alternatives' in payload)) {
+      payload.alternatives = maybeAlternatives;
+    }
   }
 
   console.error(

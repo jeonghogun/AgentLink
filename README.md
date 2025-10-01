@@ -49,6 +49,14 @@ AgentLink는 사람이 앱을 뒤적이지 않아도, AI가 가게와 직접 거
 - `npm run test`: Functions 워크스페이스의 단위 테스트(Node 20 `node:test` 기반)
 - `npm run seed`: Firestore/Storage 에뮬레이터 시드 데이터 12건 메뉴 + 기본 문서 투입
 - `npm run test:rules`: `firebase emulators:exec` 기반 Firestore/Storage 보안 규칙 테스트
+- `npm run -w web-dashboard test`: Vitest + React Testing Library 기반 대시보드 단위 테스트
+- `npm run -w web-dashboard test:e2e`: Playwright 기반 대시보드 E2E (사전 `npm run dev` 실행 및 `VITE_BYPASS_AUTH=true` 환경 필요)
+
+### Dashboard 환경 구성
+
+1. `cp web-dashboard/.env.example web-dashboard/.env.local`로 Vite 환경 변수를 복사하고 Firebase 프로젝트/에뮬레이터 값을 입력합니다.
+2. 로컬 실행 시 `VITE_BYPASS_AUTH=true npm run dev`를 사용하면 Firebase Auth 없이 테스트 계정으로 자동 로그인하여 개발과 Playwright 시나리오를 빠르게 검증할 수 있습니다.
+3. 에뮬레이터가 아닌 실 서비스 계정으로 로그인하려면 `.env.local`의 `VITE_BYPASS_AUTH` 값을 `false`로 유지하고 Firebase Auth 사용자 자격을 이용합니다.
 
 ## ⚙️ Functions 자동화
 

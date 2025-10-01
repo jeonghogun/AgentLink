@@ -27,10 +27,6 @@
         "function": "aiIndex"
       },
       {
-        "source": "/dashboard/**",
-        "function": "dashboardApp"
-      },
-      {
         "source": "**",
         "destination": "/index.html"
       }

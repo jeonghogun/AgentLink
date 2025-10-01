@@ -1,5 +1,6 @@
 import { type NextFunction, type Request, type Response } from 'express';
-import { ApiError, getDb } from '../lib/db.js';
+import { getDb } from '../lib/db.js';
+import { createError } from '../lib/errors.js';
 
 interface RouteMetrics {
   count: number;
@@ -73,7 +74,12 @@ export function metricsMiddleware(req: Request, res: Response, next: NextFunctio
   const ip = extractClientIp(req);
   const now = Date.now();
   if (!limiter.tryConsume(ip, now)) {
-    next(new ApiError(429, 'rate-limit/exceeded', '요청 한도를 초과했습니다.', '잠시 후 다시 시도해주세요.'));
+    next(
+      createError('rate-limit/exceeded', '요청 한도를 초과했습니다.', {
+        status: 429,
+        hint: '잠시 후 다시 시도해주세요.',
+      }),
+    );
     return;
   }
 

@@ -1,13 +1,8 @@
 import cors from 'cors';
 import express, { NextFunction, Request, Response } from 'express';
-import {
-  ApiError,
-  fetchMenuWithStore,
-  getDb,
-  loadRuntimeWeights,
-  searchMenus,
-} from '../lib/db.js';
+import { fetchMenuWithStore, getDb, loadRuntimeWeights, searchMenus } from '../lib/db.js';
 import type { MenuDocument, MenuSearchResult, RuntimeWeights, StoreDocument } from '../lib/db.js';
+import { createError, isAppError } from '../lib/errors.js';
 import { createOrder, getOrderStatus } from '../lib/orders.js';
 import {
   attachTokenMetricsPayload,
@@ -15,6 +10,8 @@ import {
   metricsMiddleware,
   type TokenSavingsSample,
 } from '../mw/metrics.js';
+import { errorMiddleware, requestContextMiddleware } from '../mw/error.js';
+import { createDashboardRouter } from './dashboard.js';
 
 type AsyncRouteHandler = (req: Request, res: Response, next: NextFunction) => Promise<void>;
 
@@ -40,13 +37,20 @@ export function createApiApp(): express.Express {
           return;
         }
 
-        callback(new ApiError(403, 'cors/not-allowed', '허용되지 않은 출처입니다.', 'API_ALLOWED_ORIGINS 환경 변수를 업데이트해주세요.'));
+        callback(
+          createError('cors/not-allowed', '허용되지 않은 출처입니다.', {
+            status: 403,
+            hint: 'API_ALLOWED_ORIGINS 환경 변수를 업데이트해주세요.',
+          }),
+        );
       },
       credentials: true,
     }),
   );
+  app.use(requestContextMiddleware);
   app.use(express.json());
   app.use(metricsMiddleware);
+  app.use('/dashboard', createDashboardRouter());
 
   app.get(
     '/health',
@@ -153,13 +157,11 @@ export function createApiApp(): express.Express {
       }
 
       if (!candidates.length) {
-        throw new ApiError(
-          404,
-          'orchestrate/no-candidates',
-          '조건에 맞는 메뉴를 찾지 못했습니다.',
-          '검색 지역이나 키워드를 완화해 다시 시도해주세요.',
-          { step: 'search', cause: 'empty' },
-        );
+        throw createError('orchestrate/no-candidates', '조건에 맞는 메뉴를 찾지 못했습니다.', {
+          status: 404,
+          hint: '검색 지역이나 키워드를 완화해 다시 시도해주세요.',
+          details: { step: 'search', cause: 'empty' },
+        });
       }
 
       const weights = await resolveWeights(preferences);
@@ -182,16 +184,18 @@ export function createApiApp(): express.Express {
           ],
         });
       } catch (error) {
-        if (error instanceof ApiError) {
-          throw new ApiError(error.status, error.code, error.message, error.hint, {
-            ...(error.details ?? {}),
-            step: 'order',
+        if (isAppError(error)) {
+          throw createError(error.code, error.message, {
+            status: error.status ?? 500,
+            hint: error.hint,
+            details: { ...(error.details ?? {}), step: 'order' },
           });
         }
 
-        throw new ApiError(500, 'orchestrate/order-failed', '주문 생성 중 오류가 발생했습니다.', '잠시 후 다시 시도해주세요.', {
-          step: 'order',
-          cause: error instanceof Error ? error.message : 'unknown',
+        throw createError('orchestrate/order-failed', '주문 생성 중 오류가 발생했습니다.', {
+          status: 500,
+          hint: '잠시 후 다시 시도해주세요.',
+          details: { step: 'order', cause: error instanceof Error ? error.message : 'unknown' },
         });
       }
 
@@ -205,10 +209,15 @@ export function createApiApp(): express.Express {
   );
 
   app.use((_req, _res, next) => {
-    next(new ApiError(404, 'route/not-found', '요청한 API 경로를 찾을 수 없습니다.', '엔드포인트 경로를 다시 확인해주세요.'));
+    next(
+      createError('route/not-found', '요청한 API 경로를 찾을 수 없습니다.', {
+        status: 404,
+        hint: '엔드포인트 경로를 다시 확인해주세요.',
+      }),
+    );
   });
 
-  app.use(errorHandler);
+  app.use(errorMiddleware);
 
   return app;
 }
@@ -219,36 +228,6 @@ function asyncHandler(fn: AsyncRouteHandler) {
   return (req: Request, res: Response, next: NextFunction) => {
     Promise.resolve(fn(req, res, next)).catch(next);
   };
-}
-
-function errorHandler(error: unknown, _req: Request, res: Response): void {
-  const normalized = normalizeError(error);
-  const payload: Record<string, unknown> = {
-    code: normalized.code,
-    message: normalized.message,
-  };
-
-  if (normalized.hint) {
-    payload.hint = normalized.hint;
-  }
-
-  if (normalized.details) {
-    Object.assign(payload, normalized.details);
-  }
-
-  res.status(normalized.status).json(payload);
-}
-
-function normalizeError(error: unknown): ApiError {
-  if (error instanceof ApiError) {
-    return error;
-  }
-
-  if (error instanceof Error) {
-    return new ApiError(500, 'internal/error', '요청 처리 중 오류가 발생했습니다.', error.message);
-  }
-
-  return new ApiError(500, 'internal/error', '요청 처리 중 알 수 없는 오류가 발생했습니다.');
 }
 
 function buildAllowedOrigins(): Set<string> {
@@ -269,7 +248,10 @@ function enforceMetricsAccess(req: Request): void {
 
   const header = req.headers.authorization;
   if (header !== `Bearer ${adminToken}`) {
-    throw new ApiError(401, 'metrics/unauthorized', '메트릭에 접근할 수 없습니다.', '관리자 토큰을 확인해주세요.');
+    throw createError('metrics/unauthorized', '메트릭에 접근할 수 없습니다.', {
+      status: 401,
+      hint: '관리자 토큰을 확인해주세요.',
+    });
   }
 }
 
@@ -314,13 +296,11 @@ function normalizeOrchestratePayload(payload: unknown): {
   preferences?: OrchestratePreferences;
 } {
   if (!payload || typeof payload !== 'object') {
-    throw new ApiError(
-      400,
-      'orchestrate/invalid-payload',
-      '요청 본문이 올바르지 않습니다.',
-      'JSON 객체 형태로 region, keyword를 전달해주세요.',
-      { step: 'input', cause: 'non-object' },
-    );
+    throw createError('orchestrate/invalid-payload', '요청 본문이 올바르지 않습니다.', {
+      status: 400,
+      hint: 'JSON 객체 형태로 region, keyword를 전달해주세요.',
+      details: { step: 'input', cause: 'non-object' },
+    });
   }
 
   const { region, keyword, preferences } = payload as Record<string, unknown>;
@@ -462,20 +442,20 @@ async function waitForCompletion(orderId: string): Promise<void> {
     }
 
     if (status.status === 'cancelled') {
-      throw new ApiError(409, 'orchestrate/order-cancelled', '주문이 취소되었습니다.', '다른 메뉴를 선택해 다시 시도해주세요.', {
-        step: 'order-status',
-        cause: 'cancelled',
-        order_id: orderId,
+      throw createError('orchestrate/order-cancelled', '주문이 취소되었습니다.', {
+        status: 409,
+        hint: '다른 메뉴를 선택해 다시 시도해주세요.',
+        details: { step: 'order-status', cause: 'cancelled', order_id: orderId },
       });
     }
 
     await delay(pollIntervalMs);
   }
 
-  throw new ApiError(504, 'orchestrate/order-timeout', '주문 완료를 확인하지 못했습니다.', '네트워크 상태를 확인 후 다시 요청해주세요.', {
-    step: 'order-status',
-    cause: 'timeout',
-    order_id: orderId,
+  throw createError('orchestrate/order-timeout', '주문 완료를 확인하지 못했습니다.', {
+    status: 504,
+    hint: '네트워크 상태를 확인 후 다시 요청해주세요.',
+    details: { step: 'order-status', cause: 'timeout', order_id: orderId },
   });
 }
 
@@ -487,9 +467,10 @@ async function loadOrderSummary(orderId: string): Promise<{ total_price: number;
   try {
     const snapshot = await getDb().collection('orders').doc(orderId).get();
     if (!snapshot.exists) {
-      throw new ApiError(404, 'order/not-found', '주문 정보를 찾을 수 없습니다.', 'order_id를 다시 확인해주세요.', {
-        step: 'order-summary',
-        cause: 'missing',
+      throw createError('order/not-found', '주문 정보를 찾을 수 없습니다.', {
+        status: 404,
+        hint: 'order_id를 다시 확인해주세요.',
+        details: { step: 'order-summary', cause: 'missing' },
       });
     }
 
@@ -502,13 +483,14 @@ async function loadOrderSummary(orderId: string): Promise<{ total_price: number;
 
     return { total_price, eta_minutes };
   } catch (error) {
-    if (error instanceof ApiError) {
+    if (isAppError(error)) {
       throw error;
     }
 
-    throw new ApiError(500, 'orchestrate/order-summary-failed', '주문 요약 정보를 불러오지 못했습니다.', '잠시 후 다시 시도해주세요.', {
-      step: 'order-summary',
-      cause: error instanceof Error ? error.message : 'unknown',
+    throw createError('orchestrate/order-summary-failed', '주문 요약 정보를 불러오지 못했습니다.', {
+      status: 500,
+      hint: '잠시 후 다시 시도해주세요.',
+      details: { step: 'order-summary', cause: error instanceof Error ? error.message : 'unknown' },
     });
   }
 }

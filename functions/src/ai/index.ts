@@ -1,6 +1,7 @@
 import type { Request } from 'firebase-functions/v2/https';
 import type { Response } from 'express';
-import { ApiError, getDb, mapFirestoreError } from '../lib/db.js';
+import { getDb, mapFirestoreError } from '../lib/db.js';
+import { AppError, createError, isAppError } from '../lib/errors.js';
 
 const CACHE_HEADER_SUCCESS = 'public, s-maxage=60, must-revalidate';
 const CACHE_HEADER_ERROR = 'public, max-age=0, must-revalidate';
@@ -37,17 +38,28 @@ export async function aiHandler(req: Request, res: Response): Promise<void> {
       return;
     }
 
-    throw new ApiError(404, 'ai/not-found', '요청한 AI 인덱스 경로를 찾을 수 없습니다.', '지원되는 엔드포인트를 확인해주세요.');
+    throw createError('ai/not-found', '요청한 AI 인덱스 경로를 찾을 수 없습니다.', {
+      status: 404,
+      hint: '지원되는 엔드포인트를 확인해주세요.',
+    });
   } catch (error) {
     const normalized = normalizeError(error);
     res.set('Content-Type', 'application/json; charset=utf-8');
     res.set('Cache-Control', CACHE_HEADER_ERROR);
-    res.status(normalized.status).json({
+    const payload: Record<string, unknown> = {
       code: normalized.code,
       message: normalized.message,
-      ...(normalized.hint ? { hint: normalized.hint } : {}),
-      ...(normalized.details ?? {}),
-    });
+    };
+
+    if (normalized.hint) {
+      payload.hint = normalized.hint;
+    }
+
+    if (normalized.details) {
+      payload.details = normalized.details;
+    }
+
+    res.status(normalized.status ?? 500).json(payload);
   }
 }
 
@@ -103,7 +115,10 @@ async function buildStorePayload(storeId: string): Promise<{
   try {
     const storeSnap = await db.collection('stores').doc(storeId).get();
     if (!storeSnap.exists) {
-      throw new ApiError(404, 'store/not-found', '해당 매장을 찾을 수 없습니다.', 'storeId 값을 다시 확인해주세요.');
+      throw createError('store/not-found', '해당 매장을 찾을 수 없습니다.', {
+        status: 404,
+        hint: 'storeId 값을 다시 확인해주세요.',
+      });
     }
 
     const storeData = storeSnap.data() as Record<string, unknown>;
@@ -138,7 +153,7 @@ async function buildStorePayload(storeId: string): Promise<{
       menus,
     };
   } catch (error) {
-    if (error instanceof ApiError) {
+    if (isAppError(error)) {
       throw error;
     }
     throw mapFirestoreError(`stores/${storeId}/menus`, error);
@@ -175,14 +190,17 @@ function extractNumber(value: unknown): number | undefined {
   return num;
 }
 
-function normalizeError(error: unknown): ApiError {
-  if (error instanceof ApiError) {
+function normalizeError(error: unknown): AppError {
+  if (isAppError(error)) {
     return error;
   }
 
   if (error instanceof Error) {
-    return new ApiError(500, 'ai/internal-error', 'AI 인덱스 처리 중 오류가 발생했습니다.', error.message);
+    return createError('ai/internal-error', 'AI 인덱스 처리 중 오류가 발생했습니다.', {
+      status: 500,
+      details: { cause: error.message },
+    });
   }
 
-  return new ApiError(500, 'ai/internal-error', 'AI 인덱스 처리 중 알 수 없는 오류가 발생했습니다.');
+  return createError('ai/internal-error', 'AI 인덱스 처리 중 알 수 없는 오류가 발생했습니다.', { status: 500 });
 }

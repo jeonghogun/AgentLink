@@ -1,4 +1,5 @@
 import { Firestore, getFirestore } from 'firebase-admin/firestore';
+import { AppError, createError, isAppError } from './errors.js';
 
 export interface RuntimeWeights {
   price: number;
@@ -53,21 +54,6 @@ export interface MenuSearchResult {
   score: number;
 }
 
-export class ApiError extends Error {
-  readonly status: number;
-  readonly code: string;
-  readonly hint?: string;
-  readonly details?: Record<string, unknown>;
-
-  constructor(status: number, code: string, message: string, hint?: string, details?: Record<string, unknown>) {
-    super(message);
-    this.status = status;
-    this.code = code;
-    this.hint = hint;
-    this.details = details;
-  }
-}
-
 let cachedDb: Firestore | undefined;
 
 export function getDb(): Firestore {
@@ -106,23 +92,32 @@ export async function fetchMenuWithStore(menuId: string): Promise<{ menu: MenuDo
   try {
     const menuSnap = await db.collection('menus').doc(menuId).get();
     if (!menuSnap.exists) {
-      throw new ApiError(404, 'menu/not-found', '요청한 메뉴를 찾을 수 없습니다.', 'menuId 값을 확인해주세요.');
+      throw createError('menu/not-found', '요청한 메뉴를 찾을 수 없습니다.', {
+        status: 404,
+        hint: 'menuId 값을 확인해주세요.',
+      });
     }
 
     const menu = { id: menuSnap.id, ...(menuSnap.data() as Record<string, unknown>) } as MenuDocument;
     if (!menu.store_id) {
-      throw new ApiError(500, 'menu/missing-store', '메뉴에 연결된 매장 정보가 없습니다.', '시드 데이터 혹은 메뉴 문서를 확인해주세요.');
+      throw createError('menu/missing-store', '메뉴에 연결된 매장 정보가 없습니다.', {
+        status: 500,
+        hint: '시드 데이터 혹은 메뉴 문서를 확인해주세요.',
+      });
     }
 
     const storeSnap = await db.collection('stores').doc(menu.store_id).get();
     if (!storeSnap.exists) {
-      throw new ApiError(404, 'store/not-found', '연결된 매장 정보를 찾을 수 없습니다.', 'store 문서가 존재하는지 확인해주세요.');
+      throw createError('store/not-found', '연결된 매장 정보를 찾을 수 없습니다.', {
+        status: 404,
+        hint: 'store 문서가 존재하는지 확인해주세요.',
+      });
     }
 
     const store = { id: storeSnap.id, ...(storeSnap.data() as Record<string, unknown>) } as StoreDocument;
     return { menu, store };
   } catch (error) {
-    if (error instanceof ApiError) {
+    if (isAppError(error)) {
       throw error;
     }
 
@@ -192,7 +187,7 @@ export async function searchMenus(params: MenuSearchParams): Promise<MenuSearchR
     filtered.sort((a, b) => b.score - a.score);
     return filtered.slice(0, limit);
   } catch (error) {
-    if (error instanceof ApiError) {
+    if (isAppError(error)) {
       throw error;
     }
     throw mapFirestoreError('menus/search', error);
@@ -236,7 +231,15 @@ function clampLimit(limit: number | undefined): number {
   return Math.min(Math.max(Math.floor(limit), 1), 50);
 }
 
-export function mapFirestoreError(context: string, error: unknown): ApiError {
+export function mapFirestoreError(context: string, error: unknown): AppError {
+  if (isAppError(error)) {
+    return error;
+  }
+
   const message = error instanceof Error ? error.message : '알 수 없는 Firestore 오류가 발생했습니다.';
-  return new ApiError(500, 'firestore/error', `Firestore(${context}) 요청 중 오류가 발생했습니다.`, message);
+  return createError('firestore/error', `Firestore(${context}) 요청 중 오류가 발생했습니다.`, {
+    status: 500,
+    details: { context, message },
+    cause: error instanceof Error ? error : undefined,
+  });
 }

@@ -1,5 +1,6 @@
 import { FieldValue } from 'firebase-admin/firestore';
-import { ApiError, MenuDocument, StoreDocument, getDb, mapFirestoreError, searchMenus } from './db.js';
+import { MenuDocument, StoreDocument, getDb, mapFirestoreError, searchMenus } from './db.js';
+import { createError, isAppError } from './errors.js';
 
 export type OrderStatus = 'pending' | 'confirmed' | 'preparing' | 'completed' | 'cancelled';
 
@@ -91,7 +92,7 @@ export async function createOrder(payload: unknown): Promise<{ order_id: string;
       await throwOrderApiError(error, menuContexts);
     }
 
-    if (error instanceof ApiError) {
+    if (isAppError(error)) {
       throw error;
     }
 
@@ -130,14 +131,20 @@ export async function createOrder(payload: unknown): Promise<{ order_id: string;
 export async function getOrderStatus(orderId: string): Promise<{ order_id: string; status: OrderStatus }> {
   const id = typeof orderId === 'string' ? orderId.trim() : '';
   if (!id) {
-    throw new ApiError(400, 'order/invalid-id', '주문 ID를 확인해주세요.', '올바른 주문 ID를 전달해주세요.');
+    throw createError('order/invalid-id', '주문 ID를 확인해주세요.', {
+      status: 400,
+      hint: '올바른 주문 ID를 전달해주세요.',
+    });
   }
 
   const db = getDb();
   try {
     const snapshot = await db.collection('orders').doc(id).get();
     if (!snapshot.exists) {
-      throw new ApiError(404, 'order/not-found', '요청한 주문을 찾을 수 없습니다.', 'order_id 값을 다시 확인해주세요.');
+      throw createError('order/not-found', '요청한 주문을 찾을 수 없습니다.', {
+        status: 404,
+        hint: 'order_id 값을 다시 확인해주세요.',
+      });
     }
 
     const data = snapshot.data() ?? {};
@@ -145,7 +152,7 @@ export async function getOrderStatus(orderId: string): Promise<{ order_id: strin
 
     return { order_id: snapshot.id, status };
   } catch (error) {
-    if (error instanceof ApiError) {
+    if (isAppError(error)) {
       throw error;
     }
 
@@ -155,24 +162,36 @@ export async function getOrderStatus(orderId: string): Promise<{ order_id: strin
 
 export function normalizeOrderRequest(payload: unknown): { userId: string; items: NormalizedOrderItem[] } {
   if (!payload || typeof payload !== 'object') {
-    throw new ApiError(400, 'order/invalid-payload', '주문 요청 본문이 올바르지 않습니다.', 'JSON 객체 형태로 전달해주세요.');
+    throw createError('order/invalid-payload', '주문 요청 본문이 올바르지 않습니다.', {
+      status: 400,
+      hint: 'JSON 객체 형태로 전달해주세요.',
+    });
   }
 
   const { user_id: userIdRaw, items: itemsRaw } = payload as RawOrderPayload;
   const userId = typeof userIdRaw === 'string' ? userIdRaw.trim() : '';
 
   if (!userId) {
-    throw new ApiError(400, 'order/invalid-user', 'user_id는 필수 값입니다.', '로그인한 사용자 ID를 전달해주세요.');
+    throw createError('order/invalid-user', 'user_id는 필수 값입니다.', {
+      status: 400,
+      hint: '로그인한 사용자 ID를 전달해주세요.',
+    });
   }
 
   if (!Array.isArray(itemsRaw) || itemsRaw.length === 0) {
-    throw new ApiError(400, 'order/empty-items', '최소 한 개의 주문 항목을 포함해야 합니다.', 'items 배열을 확인해주세요.');
+    throw createError('order/empty-items', '최소 한 개의 주문 항목을 포함해야 합니다.', {
+      status: 400,
+      hint: 'items 배열을 확인해주세요.',
+    });
   }
 
   const normalized: NormalizedOrderItem[] = [];
   for (const entry of itemsRaw) {
     if (!entry || typeof entry !== 'object') {
-      throw new ApiError(400, 'order/invalid-item', '주문 항목 형식이 잘못되었습니다.', 'menu_id와 qty를 포함한 객체 형태여야 합니다.');
+      throw createError('order/invalid-item', '주문 항목 형식이 잘못되었습니다.', {
+        status: 400,
+        hint: 'menu_id와 qty를 포함한 객체 형태여야 합니다.',
+      });
     }
 
     const { menu_id: menuIdRaw, qty, selected_options: selectedOptionsRaw } = entry as RawOrderItem;
@@ -180,11 +199,17 @@ export function normalizeOrderRequest(payload: unknown): { userId: string; items
     const quantity = Number.isFinite(qty) ? Math.floor(Number(qty)) : NaN;
 
     if (!menuId) {
-      throw new ApiError(400, 'order/missing-menu', 'menu_id가 누락되었습니다.', '각 항목에 menu_id를 포함해주세요.');
+      throw createError('order/missing-menu', 'menu_id가 누락되었습니다.', {
+        status: 400,
+        hint: '각 항목에 menu_id를 포함해주세요.',
+      });
     }
 
     if (!Number.isFinite(quantity) || quantity <= 0) {
-      throw new ApiError(400, 'order/invalid-quantity', '수량(qty)은 1 이상의 정수여야 합니다.', '요청 수량을 다시 확인해주세요.');
+      throw createError('order/invalid-quantity', '수량(qty)은 1 이상의 정수여야 합니다.', {
+        status: 400,
+        hint: '요청 수량을 다시 확인해주세요.',
+      });
     }
 
     const selectedOptions: NormalizedOption[] = [];
@@ -235,11 +260,17 @@ export function buildOrderDraft({
   now?: string;
 }): OrderDraft {
   if (!userId) {
-    throw new ApiError(400, 'order/invalid-user', 'user_id는 필수 값입니다.', '로그인한 사용자 ID를 전달해주세요.');
+    throw createError('order/invalid-user', 'user_id는 필수 값입니다.', {
+      status: 400,
+      hint: '로그인한 사용자 ID를 전달해주세요.',
+    });
   }
 
   if (!items.length) {
-    throw new ApiError(400, 'order/empty-items', '최소 한 개의 주문 항목을 포함해야 합니다.', 'items 배열을 확인해주세요.');
+    throw createError('order/empty-items', '최소 한 개의 주문 항목을 포함해야 합니다.', {
+      status: 400,
+      hint: 'items 배열을 확인해주세요.',
+    });
   }
 
   const totalQtyByMenu = new Map<string, number>();
@@ -255,19 +286,20 @@ export function buildOrderDraft({
   for (const item of items) {
     const context = menuContexts.get(item.menuId);
     if (!context) {
-      throw new ApiError(404, 'menu/not-found', '요청한 메뉴를 찾을 수 없습니다.', 'menu_id 값을 확인해주세요.');
+      throw createError('menu/not-found', '요청한 메뉴를 찾을 수 없습니다.', {
+        status: 404,
+        hint: 'menu_id 값을 확인해주세요.',
+      });
     }
 
     if (!store) {
       store = context.store;
       assertStoreAcceptsOrder(store);
     } else if (store.id !== context.store.id) {
-      throw new ApiError(
-        400,
-        'order/multiple-stores',
-        '하나의 주문에는 동일 매장의 메뉴만 포함할 수 있습니다.',
-        '매장별로 주문을 분리해주세요.',
-      );
+      throw createError('order/multiple-stores', '하나의 주문에는 동일 매장의 메뉴만 포함할 수 있습니다.', {
+        status: 400,
+        hint: '매장별로 주문을 분리해주세요.',
+      });
     }
 
     const requiredQty = totalQtyByMenu.get(item.menuId) ?? item.quantity;
@@ -295,7 +327,7 @@ export function buildOrderDraft({
   }
 
   if (!store) {
-    throw new ApiError(500, 'order/missing-store', '주문 매장 정보를 확인할 수 없습니다.');
+    throw createError('order/missing-store', '주문 매장 정보를 확인할 수 없습니다.', { status: 500 });
   }
 
   return {
@@ -346,13 +378,19 @@ async function fetchMenuContexts(menuIds: string[]): Promise<Map<string, MenuCon
 
     for (const snapshot of menuSnapshots) {
       if (!snapshot.exists) {
-        throw new ApiError(404, 'menu/not-found', '요청한 메뉴를 찾을 수 없습니다.', 'menu_id 값을 확인해주세요.');
+        throw createError('menu/not-found', '요청한 메뉴를 찾을 수 없습니다.', {
+          status: 404,
+          hint: 'menu_id 값을 확인해주세요.',
+        });
       }
 
       const data = snapshot.data() as Record<string, unknown>;
       const storeId = typeof data.store_id === 'string' ? data.store_id : '';
       if (!storeId) {
-        throw new ApiError(500, 'menu/missing-store', '메뉴에 연결된 매장 정보가 없습니다.', '데이터 시드를 확인해주세요.');
+        throw createError('menu/missing-store', '메뉴에 연결된 매장 정보가 없습니다.', {
+          status: 500,
+          hint: '데이터 시드를 확인해주세요.',
+        });
       }
 
       storeIds.add(storeId);
@@ -364,7 +402,10 @@ async function fetchMenuContexts(menuIds: string[]): Promise<Map<string, MenuCon
     const stores = new Map<string, StoreDocument>();
     for (const snapshot of storeSnapshots) {
       if (!snapshot.exists) {
-        throw new ApiError(404, 'store/not-found', '연결된 매장 정보를 찾을 수 없습니다.', 'store 문서를 확인해주세요.');
+        throw createError('store/not-found', '연결된 매장 정보를 찾을 수 없습니다.', {
+          status: 404,
+          hint: 'store 문서를 확인해주세요.',
+        });
       }
       stores.set(snapshot.id, { id: snapshot.id, ...(snapshot.data() as Record<string, unknown>) } as StoreDocument);
     }
@@ -373,7 +414,10 @@ async function fetchMenuContexts(menuIds: string[]): Promise<Map<string, MenuCon
     for (const [menuId, info] of pending) {
       const store = stores.get(info.storeId);
       if (!store) {
-        throw new ApiError(404, 'store/not-found', '연결된 매장 정보를 찾을 수 없습니다.', 'store 문서를 확인해주세요.');
+        throw createError('store/not-found', '연결된 매장 정보를 찾을 수 없습니다.', {
+          status: 404,
+          hint: 'store 문서를 확인해주세요.',
+        });
       }
 
       contexts.set(menuId, { menu: info.menu, store });
@@ -381,7 +425,7 @@ async function fetchMenuContexts(menuIds: string[]): Promise<Map<string, MenuCon
 
     return contexts;
   } catch (error) {
-    if (error instanceof ApiError) {
+    if (isAppError(error)) {
       throw error;
     }
 
@@ -399,7 +443,10 @@ async function throwOrderApiError(error: OrderValidationError, menuContexts: Map
   }
 
   const alternatives = await suggestAlternatives(error.store, excludeMenuIds);
-  throw new ApiError(409, error.code, error.message, undefined, { alternatives });
+  throw createError(error.code, error.message, {
+    status: 409,
+    details: { alternatives },
+  });
 }
 
 async function suggestAlternatives(store: StoreDocument, excludeMenuIds: Set<string>): Promise<string[]> {

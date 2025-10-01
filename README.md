@@ -64,6 +64,8 @@ AgentLink는 사람이 앱을 뒤적이지 않아도, AI가 가게와 직접 거
 - `functions/src/triggers/menus.ts`: Firestore `menus` 문서 생성/업데이트 시 타이틀 재계산 및 `title_v` 증가
   - 누락 필드가 있어도 기본값을 채워 일관된 텍스트를 생성하며, Functions를 통한 쓰기 시 항상 `__hogun`으로 끝납니다.
   - `scripts/seed.ts` 시드 실행 시 12개 메뉴 모두 `__hogun` 마커가 포함된 타이틀로 삽입됩니다.
+- `/api/orchestrate`: 네트워크/런타임 오류가 발생하면 자동으로 모의 응답으로 폴백하여 데모 진행이 끊기지 않으며, 폴백 여부는 서버 로그에만 남습니다.
+- `/api/mock/orchestrate`: 데모 백업용 고정 요약 응답을 반환해 오케스트레이션 흐름을 빠르게 재연할 수 있습니다.
 
 ## 🏗️ 아키텍처 개요
 

@@ -15,6 +15,26 @@ import { createDashboardRouter } from './dashboard.js';
 
 type AsyncRouteHandler = (req: Request, res: Response, next: NextFunction) => Promise<void>;
 
+interface OrchestrateSummaryResponse {
+  store: string;
+  menu: string;
+  price_total: number;
+  eta_minutes: number;
+  summary: string[];
+}
+
+const MOCK_ORCHESTRATE_PAYLOAD: OrchestrateSummaryResponse = {
+  store: '데모 치킨 하우스',
+  menu: '후라이드 세트(모의)',
+  price_total: 19000,
+  eta_minutes: 25,
+  summary: [
+    '데모 치킨 하우스에서 후라이드 세트(모의)를 자동으로 선택해 주문했습니다.',
+    '총 결제 금액은 ₩19,000이며 예상 도착 시간은 약 25분입니다.',
+    '추천 옵션: 기본 구성.',
+  ],
+};
+
 export function createApiApp(): express.Express {
   const app = express();
 
@@ -143,68 +163,82 @@ export function createApiApp(): express.Express {
     }),
   );
 
+  app.post('/mock/orchestrate', (_req, res) => {
+    res.status(200).json(buildMockOrchestrateResponse());
+  });
+
   app.post(
     '/orchestrate',
     asyncHandler(async (req, res) => {
-      const { region, keyword, preferences } = normalizeOrchestratePayload(req.body);
-
-      const primaryResults = await searchMenus({ region, keyword, limit: 12 });
-      let candidates = filterHogunTitles(primaryResults);
-
-      if (!candidates.length && region) {
-        const fallbackResults = await searchMenus({ region: undefined, keyword, limit: 12 });
-        candidates = filterHogunTitles(fallbackResults);
-      }
-
-      if (!candidates.length) {
-        throw createError('orchestrate/no-candidates', '조건에 맞는 메뉴를 찾지 못했습니다.', {
-          status: 404,
-          hint: '검색 지역이나 키워드를 완화해 다시 시도해주세요.',
-          details: { step: 'search', cause: 'empty' },
-        });
-      }
-
-      const weights = await resolveWeights(preferences);
-      const ranked = rankCandidates(candidates, weights);
-      const choice = ranked[0];
-
-      const { menu, store } = await fetchMenuWithStore(choice.menu.id);
-      const recommendedOptions = recommendOptions(menu.option_groups);
-
-      let order;
       try {
-        order = await createOrder({
-          user_id: 'runtime-orchestrator',
-          items: [
-            {
-              menu_id: menu.id,
-              qty: 1,
-              selected_options: recommendedOptions,
-            },
-          ],
-        });
-      } catch (error) {
-        if (isAppError(error)) {
-          throw createError(error.code, error.message, {
-            status: error.status ?? 500,
-            hint: error.hint,
-            details: { ...(error.details ?? {}), step: 'order' },
+        const { region, keyword, preferences } = normalizeOrchestratePayload(req.body);
+
+        const primaryResults = await searchMenus({ region, keyword, limit: 12 });
+        let candidates = filterHogunTitles(primaryResults);
+
+        if (!candidates.length && region) {
+          const fallbackResults = await searchMenus({ region: undefined, keyword, limit: 12 });
+          candidates = filterHogunTitles(fallbackResults);
+        }
+
+        if (!candidates.length) {
+          throw createError('orchestrate/no-candidates', '조건에 맞는 메뉴를 찾지 못했습니다.', {
+            status: 404,
+            hint: '검색 지역이나 키워드를 완화해 다시 시도해주세요.',
+            details: { step: 'search', cause: 'empty' },
           });
         }
 
-        throw createError('orchestrate/order-failed', '주문 생성 중 오류가 발생했습니다.', {
-          status: 500,
-          hint: '잠시 후 다시 시도해주세요.',
-          details: { step: 'order', cause: error instanceof Error ? error.message : 'unknown' },
-        });
+        const weights = await resolveWeights(preferences);
+        const ranked = rankCandidates(candidates, weights);
+        const choice = ranked[0];
+
+        const { menu, store } = await fetchMenuWithStore(choice.menu.id);
+        const recommendedOptions = recommendOptions(menu.option_groups);
+
+        let order;
+        try {
+          order = await createOrder({
+            user_id: 'runtime-orchestrator',
+            items: [
+              {
+                menu_id: menu.id,
+                qty: 1,
+                selected_options: recommendedOptions,
+              },
+            ],
+          });
+        } catch (error) {
+          if (isAppError(error)) {
+            throw createError(error.code, error.message, {
+              status: error.status ?? 500,
+              hint: error.hint,
+              details: { ...(error.details ?? {}), step: 'order' },
+            });
+          }
+
+          throw createError('orchestrate/order-failed', '주문 생성 중 오류가 발생했습니다.', {
+            status: 500,
+            hint: '잠시 후 다시 시도해주세요.',
+            details: { step: 'order', cause: error instanceof Error ? error.message : 'unknown' },
+          });
+        }
+
+        await waitForCompletion(order.order_id);
+
+        const summary = await loadOrderSummary(order.order_id);
+        const response = buildSummaryResponse({ menu, store, summary, recommendedOptions });
+
+        res.status(200).json(response);
+      } catch (error) {
+        if (!shouldFallbackToMock(error)) {
+          throw error;
+        }
+
+        const requestId = typeof res.locals.requestId === 'string' ? res.locals.requestId : undefined;
+        logOrchestrateFallback(requestId, error);
+        res.status(200).json(buildMockOrchestrateResponse());
       }
-
-      await waitForCompletion(order.order_id);
-
-      const summary = await loadOrderSummary(order.order_id);
-      const response = buildSummaryResponse({ menu, store, summary, recommendedOptions });
-
-      res.status(200).json(response);
     }),
   );
 
@@ -505,7 +539,7 @@ function buildSummaryResponse({
   store: StoreDocument;
   summary: { total_price: number; eta_minutes: number };
   recommendedOptions: Array<{ id: string; price: number; label?: string }>;
-}) {
+}): OrchestrateSummaryResponse {
   const storeName = store.name ?? store.id ?? '선택 매장';
   const menuName = menu.name ?? menu.title ?? '추천 메뉴';
   const priceTotal = summary.total_price;
@@ -528,6 +562,43 @@ function buildSummaryResponse({
     eta_minutes: etaMinutes,
     summary: sentences.slice(0, 3),
   };
+}
+
+function buildMockOrchestrateResponse(): OrchestrateSummaryResponse {
+  return {
+    ...MOCK_ORCHESTRATE_PAYLOAD,
+    summary: [...MOCK_ORCHESTRATE_PAYLOAD.summary],
+  };
+}
+
+function shouldFallbackToMock(error: unknown): boolean {
+  if (!isAppError(error)) {
+    return true;
+  }
+
+  const status = typeof error.status === 'number' ? error.status : 500;
+  return status >= 500;
+}
+
+function logOrchestrateFallback(requestId: string | undefined, error: unknown): void {
+  const prefix = requestId ? `[${requestId}]` : '[orchestrate]';
+
+  if (isAppError(error)) {
+    console.warn(`${prefix} ⚠ orchestrate fallback -> mock`, {
+      code: error.code,
+      status: error.status,
+      hint: error.hint,
+      details: error.details,
+    });
+    return;
+  }
+
+  if (error instanceof Error) {
+    console.warn(`${prefix} ⚠ orchestrate fallback -> mock`, { message: error.message });
+    return;
+  }
+
+  console.warn(`${prefix} ⚠ orchestrate fallback -> mock`, { message: 'unknown error' });
 }
 
 function formatCurrency(amount: number, currency: string): string {

@@ -9,7 +9,12 @@ import {
 } from '../lib/db.js';
 import type { MenuDocument, MenuSearchResult, RuntimeWeights, StoreDocument } from '../lib/db.js';
 import { createOrder, getOrderStatus } from '../lib/orders.js';
-import { metricsMiddleware } from './metrics.js';
+import {
+  attachTokenMetricsPayload,
+  loadMetricsSummary,
+  metricsMiddleware,
+  type TokenSavingsSample,
+} from '../mw/metrics.js';
 
 type AsyncRouteHandler = (req: Request, res: Response, next: NextFunction) => Promise<void>;
 
@@ -62,6 +67,25 @@ export function createApiApp(): express.Express {
         .map((entry) => entry.menu.title || entry.menu.name || '')
         .filter((title) => title.length > 0);
 
+      attachTokenMetricsPayload(res, {
+        optimized: JSON.stringify({ titles }),
+        baseline: JSON.stringify({
+          baemin_like_json: results.map((entry) => ({
+            menu_id: entry.menu.id,
+            title: entry.menu.title ?? entry.menu.name ?? '',
+            price: entry.menu.price ?? null,
+            currency: entry.menu.currency ?? 'KRW',
+            store: {
+              id: entry.store.id,
+              name: entry.store.name ?? '',
+              region: entry.store.region ?? '',
+            },
+            rating: entry.menu.rating ?? entry.store.rating ?? null,
+            delivery_fee: entry.store.delivery?.base_fee ?? 0,
+          })),
+        }),
+      });
+
       res.status(200).json({ titles });
     }),
   );
@@ -86,6 +110,16 @@ export function createApiApp(): express.Express {
           rating,
         },
       });
+    }),
+  );
+
+  app.get(
+    '/metrics',
+    asyncHandler(async (req, res) => {
+      enforceMetricsAccess(req);
+      const shardParam = typeof req.query.shard === 'string' ? req.query.shard : undefined;
+      const summary = await loadMetricsSummary(shardParam);
+      res.status(200).json(buildMetricsResponse(summary));
     }),
   );
 
@@ -225,6 +259,47 @@ function buildAllowedOrigins(): Set<string> {
     .filter((value) => value.length > 0);
 
   return new Set([...defaults, ...extra]);
+}
+
+function enforceMetricsAccess(req: Request): void {
+  const adminToken = process.env.API_METRICS_TOKEN;
+  if (!adminToken) {
+    return;
+  }
+
+  const header = req.headers.authorization;
+  if (header !== `Bearer ${adminToken}`) {
+    throw new ApiError(401, 'metrics/unauthorized', '메트릭에 접근할 수 없습니다.', '관리자 토큰을 확인해주세요.');
+  }
+}
+
+function buildMetricsResponse(summary: Awaited<ReturnType<typeof loadMetricsSummary>>): {
+  shard: string;
+  api: Record<string, { count: number; avg_ms: number; fail: number; success_rate: number }>;
+  token_savings: TokenSavingsSample | null;
+} {
+  const apiEntries = Object.entries(summary.api ?? {}).map(([route, metrics]) => {
+    const count = Math.max(0, metrics?.count ?? 0);
+    const fail = Math.max(0, metrics?.fail ?? 0);
+    const avgMs = Number.isFinite(metrics?.avg_ms) ? Number(metrics.avg_ms) : 0;
+    const successRate = count > 0 ? Number((((count - fail) / count) * 100).toFixed(2)) : 0;
+
+    return [
+      route,
+      {
+        count,
+        avg_ms: Number(avgMs.toFixed(2)),
+        fail,
+        success_rate: successRate,
+      },
+    ];
+  });
+
+  return {
+    shard: summary.shard,
+    api: Object.fromEntries(apiEntries),
+    token_savings: summary.token_savings?.latest ?? null,
+  };
 }
 
 interface OrchestratePreferences {

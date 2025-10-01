@@ -178,6 +178,15 @@ AgentLink는 사람이 앱을 뒤적이지 않아도, AI가 가게와 직접 거
   "api": {
     "/api/search": { "count": 1200, "avg_ms": 80, "fail": 4 },
     "/api/order": { "count": 340, "avg_ms": 120, "fail": 7 }
+  },
+  "token_savings": {
+    "latest": {
+      "baseline_tokens": 9800,
+      "optimized_tokens": 2400,
+      "savings_ratio": 0.7551,
+      "savings_percent": 75.51,
+      "captured_at": "2024-03-01T09:05:00+09:00"
+    }
   }
 }
 ```
@@ -303,9 +312,9 @@ GET /ai/store/:id.json
 
 📊 측정 & 관측성
 
-/api/metrics: 호출 수, 평균 응답(ms), 실패율, 주문 전환률
+/api/metrics: 호출 수, 평균 응답(ms), 실패율, token_savings 샘플 (헤더 `Authorization: Bearer $API_METRICS_TOKEN`)
 
-토큰 절감률 = string.length / 4 근사
+토큰 절감률 = string.length / 4 근사(estimateTokens)
 
 목표: 기존 플랫폼 대비 ~68% 절감
 

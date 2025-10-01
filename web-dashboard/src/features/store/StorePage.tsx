@@ -4,6 +4,7 @@ import { z } from 'zod';
 import { useInvalidateSearchPreview, useSearchPreview } from '../../hooks/useSearchPreview';
 import { useStoreQuery, useUpdateStoreMutation } from '../../hooks/useStoreQuery';
 import type { DeliveryRule, Store, StorePayload } from '../../api/types';
+import { Field } from '../../components/Field';
 
 const storeSchema = z.object({
   name: z.string().min(1),
@@ -241,14 +242,6 @@ function parseRules(value: string): DeliveryRule[] {
   }
 }
 
-function Field({ label, children }: { label: string; children: React.ReactNode }) {
-  return (
-    <label className="block text-sm text-slate-300">
-      <span className="mb-1 block font-medium text-slate-200">{label}</span>
-      {children}
-    </label>
-  );
-}
 
 function StatusButton({
   label,

@@ -11,7 +11,6 @@ vi.mock('../../api/menus', () => ({
 }));
 
 const menusApi = await import('../../api/menus');
-const createMenu = vi.mocked(menusApi.createMenu);
 const updateMenu = vi.mocked(menusApi.updateMenu);
 const deleteMenu = vi.mocked(menusApi.deleteMenu);
 

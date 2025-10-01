@@ -28,7 +28,7 @@
       },
       {
         "source": "/dashboard/**",
-        "destination": "/index.html"
+        "function": "dashboardApp"
       },
       {
         "source": "**",

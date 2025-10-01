@@ -28,7 +28,7 @@ export function requestContextMiddleware(req: Request, res: Response, next: Next
   next();
 }
 
-export function errorMiddleware(error: unknown, req: Request, res: Response, _next: NextFunction): void {
+export function errorMiddleware(error: unknown, req: Request, res: Response): void {
   let normalized: AppError;
   if (isAppError(error)) {
     normalized = error;

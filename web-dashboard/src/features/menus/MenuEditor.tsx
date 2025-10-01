@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { z } from 'zod';
 import type { MenuOption, MenuOptionGroup } from '../../api/types';
 import { uploadMenuImages } from '../../storage/upload';
+import { Field } from '../../components/Field';
 
 export type MenuFormValues = {
   name: string;

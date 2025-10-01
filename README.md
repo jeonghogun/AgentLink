@@ -53,6 +53,28 @@ AgentLink는 사람이 앱을 뒤적이지 않아도, AI가 가게와 직접 거
 - `npm run -w web-dashboard test:e2e`: Playwright 기반 대시보드 E2E (사전 `npm run dev` 실행 및 `VITE_BYPASS_AUTH=true` 환경 필요)
 - `npm run e2e`: Firestore 시드 → API/보안 검증(supertest) → Playwright 대시보드 플로우를 한 번에 실행하는 QA 통합 체크리스트
 
+## 🧪 시연 전 점검 순서
+
+1. **Seed 데이터 적재**
+   ```bash
+   npm run seed
+   ```
+   - 에뮬레이터를 사용 중인 경우 종료 후 실행하면 충돌을 피할 수 있습니다.
+   - Firestore/Storage 규칙이 최신 상태인지(`npm run test:rules`)도 함께 확인하세요.
+2. **E2E 통합 점검**
+   ```bash
+   npm run e2e
+   ```
+   - supertest 기반 API 플로우와 Playwright 대시보드 시나리오가 모두 통과해야 합니다.
+   - 실패 시 `tests/`와 `web-dashboard/tests/` 하위 리포트에서 에러 코드(E01~E03 등)를 확인하고 재시도합니다.
+3. **배포 트리거(main push)**
+   ```bash
+   git push origin main
+   ```
+   - GitHub Actions 워크플로우가 `npm ci → lint/typecheck/build → firebase deploy --only functions,hosting` 순으로 실행되며, `PROJECT_ID`, `FIREBASE_TOKEN` 저장소 시크릿을 사용합니다.
+   - GitHub Actions 배포 로그에서 `functions[api]`, `functions[aiIndex]`, `functions[dashboardApp]`가 모두 업데이트되었는지 확인하고, Firebase Hosting 콘솔 또는 `firebase hosting:sites:list` / `firebase functions:log`로 `/api`, `/ai`, `/dashboard` 라우팅이 Functions를 거쳐 응답하는지 검증합니다. `dashboardApp`은 Cloud Functions에서 Vite 빌드 산출물을 서빙하므로, 배포 전 `npm run -w web-dashboard build`를 수행했는지 체크합니다.
+
+
 ### Dashboard 환경 구성
 
 1. `cp web-dashboard/.env.example web-dashboard/.env.local`로 Vite 환경 변수를 복사하고 Firebase 프로젝트/에뮬레이터 값을 입력합니다.
